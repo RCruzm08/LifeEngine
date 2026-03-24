@@ -111,4 +111,4 @@ Esse projeto nasceu de uma brincadeira e qualquer ideia nova é bem-vinda. Quer 
 
 ---
 
-*Feito com café, papo de roda e uma pitada de IA.*
+*Feito com café, papo de roda e uma pitada de IA para o front.*
