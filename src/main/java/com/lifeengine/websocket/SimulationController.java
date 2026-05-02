@@ -51,4 +51,18 @@ public class SimulationController {
         if (body.containsKey("mutBoost"))  engine.setMutBoost(((Number) body.get("mutBoost")).doubleValue());
         return Map.of("status", "ok");
     }
+
+    
+    @GetMapping("/snapshot")
+    public Map<String,Object> snapshot() {
+        return engine.getSnapshot();
+    }
+
+    @GetMapping("/status")
+    public Map<String,Object> status() {
+        return Map.of(
+            "running", engine.isRunning(),
+            "cycle",   engine.getCycle()
+        );
+    }
 }
