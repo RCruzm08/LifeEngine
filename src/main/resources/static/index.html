@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Life Engine v3 — Ecosystem</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<title>Life Engine  — Ecosystem</title>
+<link href="https:">
 <style>
 :root {
   --bg:#04080f;--s1:#080f1a;--s2:#0d1620;--s3:#12202e;
@@ -26,13 +26,13 @@ body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;o
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-thumb{background:var(--dim);border-radius:2px}
 
-/* scanlines */
+
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
   background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.025) 2px,rgba(0,0,0,0.025) 4px);
   animation:scan 10s linear infinite}
 @keyframes scan{to{background-position:0 80px}}
 
-/* grid bg */
+
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(0,150,255,0.04),transparent),
     linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
@@ -40,7 +40,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 
 .wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
 
-/* HEADER */
+
 header{padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;
   border-bottom:1px solid var(--border2);background:rgba(4,8,15,0.94);backdrop-filter:blur(20px);
   position:sticky;top:0;z-index:200}
@@ -63,10 +63,10 @@ header{padding:0 40px;height:56px;display:flex;align-items:center;justify-conten
 .pill-dot.live{background:var(--plant);box-shadow:0 0 6px var(--plantm);animation:lp 1.5s ease-in-out infinite}
 .pill.live{border-color:var(--plantm);color:var(--plant)}
 
-/* MAIN LAYOUT */
+
 .layout{display:grid;grid-template-columns:1fr 340px;gap:0;flex:1}
 
-/* CANVAS SIDE */
+
 .canvas-side{display:flex;flex-direction:column;border-right:1px solid var(--border)}
 .sim-topbar{padding:8px 16px;display:flex;align-items:center;justify-content:space-between;
   border-bottom:1px solid var(--border);background:rgba(8,15,26,0.8)}
@@ -81,15 +81,15 @@ header{padding:0 40px;height:56px;display:flex;align-items:center;justify-conten
 .leg{display:flex;align-items:center;gap:5px;font-size:8px;letter-spacing:0.08em;color:var(--muted)}
 .ld{width:7px;height:7px;border-radius:50%}
 
-/* SIDEBAR */
+
 .sidebar{display:flex;flex-direction:column;gap:0;overflow-y:auto;max-height:calc(100vh - 56px)}
 
 .panel{padding:14px 16px;border-bottom:1px solid var(--border)}
 .panel-hd{font-size:7px;letter-spacing:0.22em;color:var(--muted);text-transform:uppercase;
   margin-bottom:12px;display:flex;align-items:center;gap:6px}
-.panel-hd::before{content:'//';color:var(--dim)}
+.panel-hd::before{content:'
 
-/* CONTROLS */
+
 .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:10px}
 .btn{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.05em;
   padding:8px 10px;border-radius:6px;cursor:pointer;transition:all .15s;
@@ -101,7 +101,7 @@ header{padding:0 40px;height:56px;display:flex;align-items:center;justify-conten
 .btn.info{background:var(--waterd);border-color:var(--waterm);color:var(--water)}
 .btn.full{grid-column:1/-1}
 
-/* SLIDERS */
+
 .sliders{display:flex;flex-direction:column;gap:10px}
 .sli{display:flex;flex-direction:column;gap:4px}
 .sli-label{font-size:8px;letter-spacing:0.1em;color:var(--muted);display:flex;justify-content:space-between}
@@ -111,13 +111,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;heigh
   background:var(--plant);border:2px solid var(--bg);cursor:pointer;transition:transform .15s}
 input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.35)}
 
-/* STATS GRID */
+
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .sc{background:var(--s2);border-radius:6px;padding:8px 10px;border:1px solid var(--border)}
 .sc-val{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}
 .sc-key{font-size:7px;letter-spacing:0.14em;color:var(--muted);margin-top:3px;text-transform:uppercase}
 
-/* SPECIES PANEL */
+
 .species-row{display:flex;flex-direction:column;gap:5px}
 .sp-item{display:flex;align-items:center;justify-content:space-between;
   background:var(--s2);border-radius:6px;padding:6px 10px;border:1px solid var(--border)}
@@ -125,7 +125,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.35)}
 .sp-icon{width:18px;height:18px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px}
 .sp-count{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums}
 
-/* TEMP BAR */
+
 .temp-bar-wrap{background:var(--s2);border-radius:6px;padding:10px;border:1px solid var(--border);margin-bottom:8px}
 .temp-label-row{display:flex;justify-content:space-between;font-size:8px;color:var(--muted);margin-bottom:6px}
 .temp-bar{height:6px;border-radius:3px;position:relative;overflow:hidden;
@@ -134,7 +134,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.35)}
   background:#fff;border:2px solid var(--bg);transition:left .5s;transform:translateX(-50%)}
 .temp-val{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;text-align:center;margin-top:6px}
 
-/* CHARTS */
+
 .charts{display:flex;flex-direction:column;gap:8px}
 .cpanel{background:var(--s1);border-radius:8px;padding:12px;border:1px solid var(--border)}
 .cpanel-hd{font-size:7px;letter-spacing:0.16em;color:var(--muted);margin-bottom:8px;text-transform:uppercase}
@@ -143,7 +143,7 @@ canvas.chart{display:block;width:100%;height:70px}
 .cl{display:flex;align-items:center;gap:4px;font-size:7px;letter-spacing:0.08em;color:var(--muted)}
 .cl-dot{width:5px;height:5px;border-radius:50%}
 
-/* LOG */
+
 .log-body{height:100px;overflow-y:auto;display:flex;flex-direction:column;gap:1px}
 .log-body::-webkit-scrollbar{width:2px}
 .le{font-size:8px;color:var(--muted);padding:1px 0;display:flex;gap:6px;line-height:1.6}
@@ -152,13 +152,13 @@ canvas.chart{display:block;width:100%;height:70px}
 .le.mutate{color:var(--mut)}.le.event{color:var(--water)}
 .le.evolve{color:var(--hum)}.le.climate{color:#ffb830}
 
-/* TOOLTIP */
+
 #tooltip{position:fixed;pointer-events:none;z-index:500;background:var(--s1);
   border:1px solid var(--border2);border-radius:8px;padding:8px 12px;font-size:8px;
   line-height:1.8;color:var(--text);display:none;max-width:180px;backdrop-filter:blur(10px)}
 #tooltip .tt-name{font-family:'Syne',sans-serif;font-size:11px;font-weight:800;margin-bottom:4px}
 
-/* BOTTOM INFO */
+
 .info-section{padding:40px;border-top:1px solid var(--border)}
 .info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:1200px}
 .info-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:18px;transition:all .2s}
@@ -187,7 +187,7 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
     <div class="logo-mark">🌍</div>
     <div>
       <div class="logo-name">LIFE ENGINE</div>
-      <div class="logo-ver">v3.0 — ECOSYSTEM</div>
+      <div class="logo-ver">ECOSYSTEM+</div>
     </div>
   </div>
   <div class="hdr-center">
@@ -209,7 +209,7 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
 
 <div class="layout">
 
-  <!-- CANVAS -->
+  
   <div class="canvas-side">
     <div class="sim-topbar">
       <span class="sim-label" id="world-size-label">WORLD 160 × 90</span>
@@ -224,16 +224,17 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
       <div class="leg"><div class="ld" style="background:#8BC34A"></div>Árvore</div>
       <div class="leg"><div class="ld" style="background:#00e676"></div>Herbívoro</div>
       <div class="leg"><div class="ld" style="background:#ff4d6d"></div>Predador</div>
+      <div class="leg"><div class="ld" style="background:#ff9f43"></div>Onívoro</div>
       <div class="leg"><div class="ld" style="background:#f9ca24"></div>Inseto</div>
       <div class="leg"><div class="ld" style="background:#b97bff"></div>Proto-Humano</div>
       <div class="leg"><div class="ld" style="background:#00c8f0"></div>Água</div>
     </div>
   </div>
 
-  <!-- SIDEBAR -->
+  
   <div class="sidebar">
 
-    <!-- controls -->
+    
     <div class="panel">
       <div class="panel-hd">controles</div>
       <div class="btn-grid">
@@ -243,6 +244,9 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
         <button class="btn info" id="btn-drought">💧 Seca</button>
         <button class="btn" id="btn-cold" style="border-color:var(--waterm);color:var(--cold)">❄ Glacial</button>
         <button class="btn" id="btn-heat" style="border-color:var(--predm);color:var(--hot)">🔥 Calor</button>
+        <button class="btn" id="btn-heatmap" style="border-color:rgba(255,100,0,0.4);color:#ff6b00">🌡 Heatmap</button>
+        <button class="btn" id="btn-biome" style="border-color:rgba(0,200,100,0.4);color:#00c864">🗺 Biomas</button>
+        <button class="btn" id="btn-save" style="border-color:var(--border2);color:var(--water)">💾 Salvar</button>
       </div>
       <div class="sliders">
         <div class="sli">
@@ -252,7 +256,7 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
       </div>
     </div>
 
-    <!-- parâmetros -->
+    
     <div class="panel">
       <div class="panel-hd">parâmetros</div>
       <div class="sliders">
@@ -275,7 +279,7 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
       </div>
     </div>
 
-    <!-- temperatura -->
+    
     <div class="panel">
       <div class="panel-hd">clima</div>
       <div class="temp-bar-wrap">
@@ -289,13 +293,13 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
       </div>
     </div>
 
-    <!-- espécies -->
+    
     <div class="panel">
       <div class="panel-hd">espécies ativas</div>
       <div class="species-row" id="species-list"></div>
     </div>
 
-    <!-- stats -->
+    
     <div class="panel">
       <div class="panel-hd">estatísticas</div>
       <div class="stats-grid">
@@ -303,6 +307,7 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
         <div class="sc"><div class="sc-val" id="st-herb" style="color:var(--herb)">0</div><div class="sc-key">Herbívoros</div></div>
         <div class="sc"><div class="sc-val" id="st-pred" style="color:var(--pred)">0</div><div class="sc-key">Predadores</div></div>
         <div class="sc"><div class="sc-val" id="st-ins" style="color:var(--ins)">0</div><div class="sc-key">Insetos</div></div>
+        <div class="sc"><div class="sc-val" id="st-omni" style="color:#ff9f43">0</div><div class="sc-key">Onívoros</div></div>
         <div class="sc"><div class="sc-val" id="st-hum" style="color:var(--hum)">0</div><div class="sc-key">Proto-Hum.</div></div>
         <div class="sc"><div class="sc-val" id="st-born" style="color:var(--muted)">0</div><div class="sc-key">Nascidos</div></div>
         <div class="sc"><div class="sc-val" id="st-dead" style="color:var(--muted)">0</div><div class="sc-key">Mortos</div></div>
@@ -310,12 +315,12 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
       </div>
     </div>
 
-    <!-- charts -->
+    
     <div class="panel">
       <div class="panel-hd">população</div>
       <div class="charts">
         <div class="cpanel">
-          <div class="cpanel-hd">// fauna — histórico</div>
+          <div class="cpanel-hd">
           <canvas class="chart" id="popChart"></canvas>
           <div class="chart-leg">
             <div class="cl"><div class="cl-dot" style="background:var(--herb)"></div>Herbívoros</div>
@@ -325,22 +330,28 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
           </div>
         </div>
         <div class="cpanel">
-          <div class="cpanel-hd">// temperatura & água</div>
+          <div class="cpanel-hd">
           <canvas class="chart" id="climChart"></canvas>
         </div>
       </div>
     </div>
 
-    <!-- log -->
+    
+    <div class="panel" id="debug-panel" style="display:none">
+      <div class="panel-hd">criatura selecionada</div>
+      <div id="debug-content" style="font-size:10px;line-height:1.9;color:var(--text)"></div>
+    </div>
+
+    
     <div class="panel">
       <div class="panel-hd">log de eventos</div>
       <div class="log-body" id="event-log"></div>
     </div>
 
-  </div><!-- /sidebar -->
-</div><!-- /layout -->
+  </div>
+</div>
 
-<!-- info section -->
+
 <div class="info-section">
   <div class="info-grid">
     <div class="info-card">
@@ -366,48 +377,53 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
   </div>
 </div>
 
+<div class="biome-legend" id="biome-legend" style="display:none;padding:8px 16px;font-size:9px;color:var(--muted);gap:14px;flex-wrap:wrap;border-top:1px solid var(--border)">
+  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:rgba(0,120,60,0.5);border-radius:2px"></div>Floresta (comida ↑, vel normal)</div>
+  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:rgba(200,160,60,0.5);border-radius:2px"></div>Deserto (comida ↓, vel ↓, calor ↑)</div>
+  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:rgba(0,140,220,0.5);border-radius:2px"></div>Água (quase intransponível)</div>
+  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:rgba(80,120,60,0.3);border-radius:2px"></div>Planície (vel ↑, comida normal)</div>
+</div>
+
 <footer>
-  <p>LIFE ENGINE v3.0 · Standalone JS · Mundo 160×90 · By Cruz</p>
+  <p>LIFE ENGINE · Standalone JS · Mundo 160×90 · By Cruz</p>
   <p id="ft-info" style="color:var(--muted)">—</p>
 </footer>
 
-</div><!-- /wrap -->
+</div>
 
 <div id="tooltip"></div>
 
 <script>
-// ════════════════════════════════════════════════════════════════
-//  CONSTANTS
-// ════════════════════════════════════════════════════════════════
+
 const COLS = 160, ROWS = 90, CELL = 8;
 const MAX_H = 100;
 
-// Entity types
+
 const T = {
   GRASS:'GRASS', BUSH:'BUSH', TREE:'TREE',
   HERB:'HERB', PRED:'PRED', INSECT:'INSECT', HUMAN:'HUMAN',
+  OMNI:'OMNI',
   WATER:'WATER'
 };
 
-// Colors
+
 const COL = {
   bg:'#04080f', grid:'rgba(120,200,255,0.025)',
   [T.GRASS]:'#2ecc40', [T.BUSH]:'#27ae60', [T.TREE]:'#1a7a32',
   [T.HERB]:'#00e676', [T.PRED]:'#ff4d6d',
+  [T.OMNI]:'#ff9f43',
   [T.INSECT]:'#f9ca24', [T.HUMAN]:'#b97bff',
   [T.WATER]:'#00c8f0',
   glow:{
     [T.HERB]:'rgba(0,230,118,0.25)',[T.PRED]:'rgba(255,77,109,0.25)',
+    [T.OMNI]:'rgba(255,159,67,0.25)',
     [T.INSECT]:'rgba(249,202,36,0.25)',[T.HUMAN]:'rgba(185,123,255,0.3)',
   }
 };
 
 const SEASONS = ['Primavera','Verão','Outono','Inverno'];
-const SEASON_TEMP_MOD = [5, 12, -2, -15]; // °C added per season
+const SEASON_TEMP_MOD = [5, 12, -2, -15]; 
 
-// ════════════════════════════════════════════════════════════════
-//  SPECIES REGISTRY
-// ════════════════════════════════════════════════════════════════
 let speciesRegistry = {};
 let speciesCounter = 0;
 
@@ -427,6 +443,7 @@ function registerSpecies(type, traits) {
 const PREFIXES = ['Aero','Cryo','Pyro','Hydro','Geo','Bio','Xeno','Neo','Proto','Mega','Micro','Ultra'];
 const SUFFIXES_H = ['raptor','vore','dactyl','saur','rex','don','pod','mus'];
 const SUFFIXES_P = ['fang','claw','jaw','hunter','stalker','slayer','tooth'];
+const SUFFIXES_O = ['phagus','venter','dator','mixus','versatilis','vorax'];
 const SUFFIXES_I = ['optera','formis','mantis','ptera','idae','cula'];
 const SUFFIXES_HM = ['sapien','erectus','habilis','cognita','vella','mora'];
 
@@ -435,14 +452,12 @@ function generateSpeciesName(type, n) {
   const pre = PREFIXES[Math.floor(n/3) % PREFIXES.length];
   if (type === T.HERB)   return pre + r(SUFFIXES_H);
   if (type === T.PRED)   return pre + r(SUFFIXES_P);
+  if (type === T.OMNI)   return pre + r(SUFFIXES_O);
   if (type === T.INSECT) return pre + r(SUFFIXES_I);
   if (type === T.HUMAN)  return 'Homo ' + r(SUFFIXES_HM);
   return 'Unknown';
 }
 
-// ════════════════════════════════════════════════════════════════
-//  ENTITY CLASS
-// ════════════════════════════════════════════════════════════════
 class Entity {
   constructor(type, x, y, opts={}) {
     this.type = type;
@@ -464,7 +479,7 @@ class Entity {
       this.maxVolume = this.volume;
       this.refillRate = 0.3;
     } else {
-      // Fauna
+      
       this.energy   = opts.energy   ?? (40 + Math.floor(Math.random()*30));
       this.hydration= opts.hydration?? (60 + Math.floor(Math.random()*30));
       this.speed    = opts.speed    ?? (1 + Math.random()*3);
@@ -474,7 +489,7 @@ class Entity {
       this.intelligence = opts.intelligence ?? (type===T.HUMAN ? 5+Math.random()*5 : 1+Math.random()*3);
       this.heatTolerance= opts.heatTolerance ?? (20 + Math.random()*20);
       this.coldTolerance= opts.coldTolerance ?? (-5 + Math.random()*15);
-      this.maxAge = type===T.INSECT?120:type===T.HERB?500:type===T.PRED?600:type===T.HUMAN?800:400;
+      this.maxAge = type===T.INSECT?120:type===T.HERB?500:type===T.PRED?600:type===T.HUMAN?800:type===T.OMNI?450:400;
       this.thirstCooldown = Math.floor(Math.random()*30);
       this.speciesKey = registerSpecies(type, this).key;
     }
@@ -499,20 +514,23 @@ class Entity {
     if (didMut) child.mutationCount = this.mutationCount + 1;
     child.speciesKey = registerSpecies(child.type, child).key;
 
-    // Check for proto-human emergence from herbivore
+    
     if (this.type === T.HERB && child.intelligence > 9 && child.mutationCount >= 4 && Math.random() < 0.03) {
       child.type = T.HUMAN;
       child.intelligence = child.intelligence * 1.5;
       child.speciesKey = registerSpecies(T.HUMAN, child).key;
       return { child, emerged: true };
     }
+    
+    if (this.type === T.HERB && child.mutationCount >= 3 && child.aggression > 2.5 && Math.random() < 0.015) {
+      child.type = T.OMNI;
+      child.speciesKey = registerSpecies(T.OMNI, child).key;
+      return { child, emerged: true };
+    }
     return { child, emerged: false };
   }
 }
 
-// ════════════════════════════════════════════════════════════════
-//  WORLD
-// ════════════════════════════════════════════════════════════════
 let world = null;
 
 class World {
@@ -543,7 +561,7 @@ class World {
     this.waterSources = [];
     speciesRegistry = {}; speciesCounter = 0;
 
-    // Water bodies (rivers, lakes)
+    
     for (let i = 0; i < 12; i++) {
       const wx = 5 + Math.floor(Math.random()*(COLS-10));
       const wy = 5 + Math.floor(Math.random()*(ROWS-10));
@@ -555,10 +573,10 @@ class World {
       }
     }
 
-    // Water entities for rendering
+    
     const waterSet = new Set(this.waterSources.map(w=>`${w.x},${w.y}`));
 
-    // Plants
+    
     for (let i=0;i<300;i++) {
       let x,y,tries=0;
       do { x=Math.floor(Math.random()*COLS); y=Math.floor(Math.random()*ROWS); tries++; }
@@ -568,7 +586,7 @@ class World {
       this.entities.push(new Entity(t,x,y));
     }
 
-    // Fauna
+    
     const spawn = (type, n) => {
       for (let i=0;i<n;i++) {
         let x,y,tries=0;
@@ -581,10 +599,11 @@ class World {
     };
     spawn(T.HERB,   60);
     spawn(T.PRED,   15);
+    spawn(T.OMNI,   20);
     spawn(T.INSECT, 80);
   }
 
-  get fauna()  { return this.entities.filter(e=>e.type===T.HERB||e.type===T.PRED||e.type===T.INSECT||e.type===T.HUMAN); }
+  get fauna()  { return this.entities.filter(e=>e.type===T.HERB||e.type===T.PRED||e.type===T.INSECT||e.type===T.HUMAN||e.type===T.OMNI); }
   get plants() { return this.entities.filter(e=>e.type===T.GRASS||e.type===T.BUSH||e.type===T.TREE); }
 
   nearestOf(cx,cy,types,range) {
@@ -632,7 +651,7 @@ class World {
     const newborns = [];
     const waterSet = new Set(this.waterSources.map(w=>`${w.x},${w.y}`));
 
-    // ── CLIMATE ──
+    
     this.seasonTimer++;
     if (this.seasonTimer >= this.SEASON_LEN) {
       this.seasonTimer = 0;
@@ -649,7 +668,7 @@ class World {
       this.currentTemp += (target - this.currentTemp) * 0.02;
     }
 
-    // ── WATER REFILL ──
+    
     if (!this.droughtActive) {
       for (const w of this.waterSources) {
         w.volume = Math.min(w.maxVolume, w.volume + w.refillRate);
@@ -660,7 +679,7 @@ class World {
       }
     }
 
-    // ── PLANTS ──
+    
     const plantList = this.plants;
     const addPlant = Math.random()*100 < this.plantRate;
     if (addPlant && plantList.length < 600) {
@@ -676,13 +695,13 @@ class World {
       }
     }
 
-    // Plant growth & seed spread
+    
     for (const p of plantList) {
       p.age++;
       const tempStress = Math.max(0, Math.abs(this.currentTemp - 20) - 15) * 0.05;
       p.energy = Math.min(p.maxEnergy, p.energy + p.growRate - tempStress);
       if (p.energy <= 0 || p.age > 1000) { p.dead = true; continue; }
-      // seed
+      
       if (Math.random() < p.seedRate && !waterSet.has(`${p.x},${p.y}`)) {
         const nx = this.clamp(p.x + Math.floor(Math.random()*7)-3, 0, COLS-1);
         const ny = this.clamp(p.y + Math.floor(Math.random()*7)-3, 0, ROWS-1);
@@ -692,7 +711,7 @@ class World {
       }
     }
 
-    // ── FAUNA ──
+    
     const faunaList = this.fauna;
 
     for (const e of faunaList) {
@@ -701,28 +720,28 @@ class World {
       e.justMutated = false;
       e.thirstCooldown--;
 
-      // Temperature damage
+      
       const tooHot  = this.currentTemp > e.heatTolerance;
       const tooCold = this.currentTemp < e.coldTolerance;
       const tempDmg = (tooHot  ? (this.currentTemp - e.heatTolerance)*0.2 : 0)
                     + (tooCold ? (e.coldTolerance - this.currentTemp)*0.2 : 0);
 
-      // Hydration drain
+      
       e.hydration -= (0.5 + e.speed*0.1);
-      if (e.hydration < 0) e.energy += e.hydration*0.5; // thirst hurts
+      if (e.hydration < 0) e.energy += e.hydration*0.5; 
 
-      // Energy drain: base + speed + temp damage
+      
       const baseDrain = e.type===T.INSECT?0.6:e.type===T.HERB?0.8:e.type===T.PRED?1.0:0.9;
       e.energy -= (baseDrain + e.speed/4 + tempDmg);
 
-      // Death
+      
       if (e.energy <= 0 || e.age > e.maxAge || e.hydration < -50) {
         e.dead = true;
         this.totalDead++;
         continue;
       }
 
-      // ── THIRST: seek water ──
+      
       if (e.thirstCooldown <= 0 || e.hydration < 20) {
         const wSrc = this.nearestWater(e.x, e.y, e.perception*3);
         if (wSrc) {
@@ -733,16 +752,16 @@ class World {
             wSrc.volume -= drink;
             e.thirstCooldown = 30 + Math.floor(Math.random()*20);
           }
-          continue; // skip other actions while thirsty
+          continue; 
         }
       }
 
-      // ── BEHAVIOR by type ──
+      
       if (e.type === T.INSECT) {
-        // Insects: eat plants, pollinate, avoid predators
+        
         const threat = this.nearestOf(e.x,e.y,[T.PRED,T.HUMAN],e.perception*2);
         if (threat) {
-          // flee
+          
           e.x = this.clamp(e.x - Math.sign(threat.x-e.x)*Math.ceil(e.speed), 0, COLS-1);
           e.y = this.clamp(e.y - Math.sign(threat.y-e.y)*Math.ceil(e.speed), 0, ROWS-1);
         } else {
@@ -760,7 +779,7 @@ class World {
         }
 
       } else if (e.type === T.HERB) {
-        // Herbivore: eat plants, flee predators
+        
         const threat = this.nearestOf(e.x,e.y,[T.PRED],e.perception*2);
         if (threat) {
           e.x = this.clamp(e.x - Math.sign(threat.x-e.x)*Math.ceil(e.speed), 0, COLS-1);
@@ -779,7 +798,7 @@ class World {
         }
 
       } else if (e.type === T.PRED) {
-        // Predator: hunt herbivores and insects
+        
         const prey = this.nearestOf(e.x,e.y,[T.HERB,T.INSECT],e.perception*2.5) ||
                      this.nearestOf(e.x,e.y,[T.HERB,T.INSECT],COLS);
         if (prey) {
@@ -792,16 +811,43 @@ class World {
           }
         } else this.wanderRandom(e);
 
+      } else if (e.type === T.OMNI) {
+        
+        const threat = this.nearestOf(e.x,e.y,[T.PRED],e.perception*2);
+        if (threat) {
+          e.x = this.clamp(e.x - Math.sign(threat.x-e.x)*Math.ceil(e.speed), 0, COLS-1);
+          e.y = this.clamp(e.y - Math.sign(threat.y-e.y)*Math.ceil(e.speed), 0, ROWS-1);
+        } else if (e.energy < 55) {
+          const prey = this.nearestOf(e.x,e.y,[T.HERB],e.perception*2);
+          if (prey) {
+            this.moveToward(e, prey.x, prey.y);
+            if (e.x===prey.x && e.y===prey.y && !prey.dead) {
+              e.energy = Math.min(100, e.energy + 30);
+              prey.dead = true; this.totalDead++;
+              events.push('death:🟠 Onívoro capturou herbívoro');
+            }
+          } else {
+            const plant = this.nearestOf(e.x,e.y,[T.GRASS,T.BUSH,T.TREE],e.perception*2);
+            if (plant) {
+              this.moveToward(e, plant.x, plant.y);
+              if (e.x===plant.x && e.y===plant.y) {
+                e.energy = Math.min(100, e.energy + 18);
+                plant.energy -= 8;
+              }
+            } else this.wanderRandom(e);
+          }
+        } else this.wanderRandom(e);
+
       } else if (e.type === T.HUMAN) {
-        // Proto-human: omnivore, smart, uses intelligence to plan
+        
         const intel = e.intelligence;
-        // avoid predators proactively
+        
         const threat = this.nearestOf(e.x,e.y,[T.PRED],e.perception*intel*0.5);
         if (threat && Math.abs(e.x-threat.x)+Math.abs(e.y-threat.y) < e.perception*2) {
           e.x = this.clamp(e.x - Math.sign(threat.x-e.x)*Math.ceil(e.speed), 0, COLS-1);
           e.y = this.clamp(e.y - Math.sign(threat.y-e.y)*Math.ceil(e.speed), 0, ROWS-1);
         } else if (e.energy < 50) {
-          // hunt or gather
+          
           const prey = intel > 7
             ? this.nearestOf(e.x,e.y,[T.HERB,T.INSECT],e.perception*3)
             : this.nearestOf(e.x,e.y,[T.GRASS,T.BUSH],e.perception*2);
@@ -820,7 +866,7 @@ class World {
         } else this.wanderRandom(e);
       }
 
-      // ── REPRODUCTION ──
+      
       const reproThreshold = e.type===T.INSECT?60:e.type===T.HUMAN?85:75;
       const reproChance = this.reproRate * (e.type===T.INSECT?2:1) / 100;
       if (e.energy > reproThreshold && e.hydration > 30 && Math.random() < reproChance) {
@@ -832,7 +878,9 @@ class World {
           newborns.push(child);
           this.totalBorn++;
           if (emerged) {
-            events.push(`evolve:🧬 Proto-humano emergiu de mutação herbívora!`);
+            if (child.type === T.HUMAN) events.push(`evolve:🧬 Proto-humano emergiu de mutação herbívora!`);
+            else if (child.type === T.OMNI) events.push(`evolve:🟠 Onívoro emergiu! Herbívoro evoluiu sob pressão predatória.`);
+            else events.push(`evolve:🧬 Nova espécie emergiu!`);
           } else if (child.justMutated) {
             this.totalMutations++;
             child.justMutated = true;
@@ -842,13 +890,13 @@ class World {
             events.push(`birth:🌱 Nascimento de ${child.type}`);
           }
 
-          // Generation count
+          
           if (this.totalBorn % 50 === 0) this.generation++;
         }
       }
     }
 
-    // ── CLEANUP ──
+    
     this.entities = this.entities.filter(e=>!e.dead);
     this.entities.push(...newborns);
 
@@ -858,19 +906,21 @@ class World {
   getStats() {
     const herbs   = this.entities.filter(e=>e.type===T.HERB).length;
     const preds   = this.entities.filter(e=>e.type===T.PRED).length;
+    const omnis   = this.entities.filter(e=>e.type===T.OMNI).length;
     const insects = this.entities.filter(e=>e.type===T.INSECT).length;
     const humans  = this.entities.filter(e=>e.type===T.HUMAN).length;
     const plants  = this.plants.length;
     const totalWater = this.waterSources.reduce((s,w)=>s+w.volume,0);
     const maxWater   = this.waterSources.reduce((s,w)=>s+w.maxVolume,0);
 
-    // Active species count
+    
     const activeSpecies = new Set(this.fauna.map(e=>e.speciesKey)).size;
 
     return {
       cycle:this.cycle, gen:this.generation,
       herbs, preds, insects, humans, plants,
-      totalPop: herbs+preds+insects+humans,
+      omnis,
+      totalPop: herbs+preds+omnis+insects+humans,
       born:this.totalBorn, dead:this.totalDead, mutations:this.totalMutations,
       temp: Math.round(this.currentTemp*10)/10,
       season: SEASONS[this.seasonIdx],
@@ -883,27 +933,55 @@ class World {
   }
 }
 
-// ════════════════════════════════════════════════════════════════
-//  CANVAS SETUP
-// ════════════════════════════════════════════════════════════════
 const canvas = document.getElementById('simCanvas');
 const ctx    = canvas.getContext('2d');
 canvas.width  = COLS * CELL;
 canvas.height = ROWS * CELL;
 
-// ════════════════════════════════════════════════════════════════
-//  RENDER
-// ════════════════════════════════════════════════════════════════
+let showHeatmap = false;
+let showBiomes = false;
+
+
+let cachedBiomeMap = null;
+
+let frontendHeatmap = null;
+
+const BIOME_COLORS = {F:'rgba(0,120,60,0.22)',D:'rgba(200,160,40,0.28)',W:'rgba(0,140,220,0.35)',P:'rgba(60,100,50,0.06)'};
+
 function render(d) {
   ctx.fillStyle = COL.bg;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Grid
+  
+  if (showBiomes && cachedBiomeMap) {
+    for (let y=0;y<ROWS;y++) {
+      const row = cachedBiomeMap[y]||'';
+      for (let x=0;x<COLS;x++) {
+        const b = row[x]||'P';
+        ctx.fillStyle = BIOME_COLORS[b]||'transparent';
+        ctx.fillRect(x*CELL, y*CELL, CELL, CELL);
+      }
+    }
+  }
+
+  
+  if (showHeatmap && frontendHeatmap) {
+    for (let x=0;x<COLS;x++) for (let y=0;y<ROWS;y++) {
+      const h = frontendHeatmap[x]?.[y]||0;
+      if (h > 0) {
+        const alpha = Math.min(0.6, h/80);
+        ctx.fillStyle = `rgba(255,100,0,${alpha})`;
+        ctx.fillRect(x*CELL, y*CELL, CELL, CELL);
+      }
+    }
+  }
+
+  
   ctx.strokeStyle = COL.grid; ctx.lineWidth = 0.4;
   for (let x=0;x<=COLS;x++){ctx.beginPath();ctx.moveTo(x*CELL,0);ctx.lineTo(x*CELL,canvas.height);ctx.stroke();}
   for (let y=0;y<=ROWS;y++){ctx.beginPath();ctx.moveTo(0,y*CELL);ctx.lineTo(canvas.width,y*CELL);ctx.stroke();}
 
-  // Water
+  
   for (const w of d.waterSources) {
     if (w.volume <= 0) continue;
     const alpha = 0.15 + (w.volume/w.maxVolume)*0.5;
@@ -911,7 +989,7 @@ function render(d) {
     ctx.fillRect(w.x*CELL, w.y*CELL, CELL, CELL);
   }
 
-  // Entities
+  
   for (const e of d.entities) {
     const px = e.x*CELL+CELL/2, py = e.y*CELL+CELL/2;
 
@@ -938,17 +1016,17 @@ function render(d) {
       continue;
     }
 
-    // Fauna
+    
     const col  = COL[e.type];
     const glow = COL.glow[e.type] || 'rgba(255,255,255,0.1)';
     const eRat = Math.max(0, Math.min(1, (e.energy||50)/100));
     const hRat = Math.max(0, Math.min(1, (e.hydration||50)/100));
 
-    // Energy ring
+    
     ctx.strokeStyle = col+'44'; ctx.lineWidth = 0.7;
     ctx.beginPath(); ctx.arc(px,py,CELL*0.85,0,Math.PI*2); ctx.stroke();
 
-    // Hydration ring (thinner, inner)
+    
     if (hRat < 0.5) {
       ctx.strokeStyle = 'rgba(0,200,240,0.5)'; ctx.lineWidth = 0.5;
       ctx.beginPath(); ctx.arc(px,py,CELL*0.6,0,Math.PI*2*hRat); ctx.stroke();
@@ -959,16 +1037,16 @@ function render(d) {
     ctx.fillStyle = col;
     ctx.font = `bold ${CELL*0.85}px monospace`;
     ctx.textAlign='center'; ctx.textBaseline='middle';
-    const sym = e.type===T.HERB?'H':e.type===T.PRED?'P':e.type===T.INSECT?'i':e.type===T.HUMAN?'Ω':'?';
+    const sym = e.type===T.HERB?'H':e.type===T.PRED?'P':e.type===T.INSECT?'i':e.type===T.HUMAN?'Ω':e.type===T.OMNI?'O':'?';
     ctx.fillText(sym, px, py);
 
-    // Mutation ring
+    
     if (e.justMutated) {
       ctx.strokeStyle='#ff00ff'; ctx.lineWidth=1.2;
       ctx.beginPath(); ctx.arc(px,py,CELL*1.0,0,Math.PI*2); ctx.stroke();
     }
 
-    // Human glow boost
+    
     if (e.type===T.HUMAN) {
       ctx.shadowColor=COL[T.HUMAN]; ctx.shadowBlur=8;
       ctx.fillStyle=COL[T.HUMAN]; ctx.fillText('Ω',px,py);
@@ -977,9 +1055,6 @@ function render(d) {
   }
 }
 
-// ════════════════════════════════════════════════════════════════
-//  CHARTS
-// ════════════════════════════════════════════════════════════════
 let popHist=[], climHist=[];
 
 function updateCharts(d) {
@@ -992,20 +1067,20 @@ function updateCharts(d) {
   drawLineMulti('popChart', popHist,
     [['#00e676',0],['#ff4d6d',1],['#f9ca24',2],['#b97bff',3]], maxPop);
 
-  // Climate chart (dual axis)
+  
   const cc = document.getElementById('climChart');
   const cx = cc.getContext('2d');
   const W=cc.width, H=cc.height;
   cx.clearRect(0,0,W,H);
   if (climHist.length < 2) return;
   const step = W/(MAX_H-1);
-  // temperature line (-20 to 50 → 70 range)
+  
   cx.strokeStyle='#ff6b2b'; cx.lineWidth=1.5; cx.beginPath();
   climHist.forEach((p,i)=>{
     const tx=i*step, ty=H-((p[0]+20)/70)*H*0.88-4;
     i===0?cx.moveTo(tx,ty):cx.lineTo(tx,ty);
   }); cx.stroke();
-  // water line (0-100%)
+  
   cx.strokeStyle='#00c8f0'; cx.lineWidth=1.2; cx.beginPath();
   climHist.forEach((p,i)=>{
     const tx=i*step, ty=H-(p[1]/100)*H*0.88-4;
@@ -1034,9 +1109,6 @@ function drawLineMulti(id, hist, series, maxV) {
   }
 }
 
-// ════════════════════════════════════════════════════════════════
-//  UI UPDATE
-// ════════════════════════════════════════════════════════════════
 function setText(id, v) { const el=document.getElementById(id); if(el) el.textContent=v; }
 
 function updateUI(d) {
@@ -1052,6 +1124,7 @@ function updateUI(d) {
   setText('st-herb',  d.herbs);
   setText('st-pred',  d.preds);
   setText('st-ins',   d.insects);
+  setText('st-omni',  d.omnis||0);
   setText('st-hum',   d.humans);
   setText('st-born',  d.born);
   setText('st-dead',  d.dead);
@@ -1061,15 +1134,15 @@ function updateUI(d) {
   setText('tval', d.temp+'°C');
   document.getElementById('tval').style.color = tc;
 
-  // Temp cursor
+  
   const pct = ((d.temp+20)/70)*100;
   const cur = document.getElementById('tcursor');
   if (cur) cur.style.left = this.clamp ? this.clamp(pct,1,99)+'%' : Math.max(1,Math.min(99,pct))+'%';
 
-  // Footer
+  
   setText('ft-info', `Ciclo ${d.cycle} · Nascidos ${d.born} · Mortos ${d.dead} · Mutações ${d.mutations}`);
 
-  // Species list
+  
   const sl = document.getElementById('species-list');
   if (sl) {
     const counts = {};
@@ -1079,6 +1152,7 @@ function updateUI(d) {
     const items = [
       {type:T.HERB,   icon:'🦌', color:'var(--herb)', label:'Herbívoros'},
       {type:T.PRED,   icon:'🐺', color:'var(--pred)', label:'Predadores'},
+      {type:T.OMNI,   icon:'🦝', color:'#ff9f43',     label:'Onívoros'},
       {type:T.INSECT, icon:'🦋', color:'var(--ins)',  label:'Insetos'},
       {type:T.HUMAN,  icon:'🧬', color:'var(--hum)',  label:'Proto-Humanos'},
     ];
@@ -1093,9 +1167,6 @@ function updateUI(d) {
   }
 }
 
-// ════════════════════════════════════════════════════════════════
-//  LOG
-// ════════════════════════════════════════════════════════════════
 function addLog(raw, cycle) {
   const colon = raw.indexOf(':');
   const type = raw.substring(0, colon);
@@ -1108,9 +1179,6 @@ function addLog(raw, cycle) {
   if (log.children.length > 100) log.removeChild(log.firstChild);
 }
 
-// ════════════════════════════════════════════════════════════════
-//  SIMULATION LOOP
-// ════════════════════════════════════════════════════════════════
 let tickDelay = 200;
 let tickTimer = null;
 
@@ -1153,6 +1221,15 @@ function scheduleTick() {
     if (!world.running) return;
     const events = world.tick();
     const d = world.getStats();
+    
+    if (!frontendHeatmap) frontendHeatmap = Array.from({length:COLS},()=>new Array(ROWS).fill(0));
+    for (const e of d.entities) {
+      if (e.type!==T.GRASS&&e.type!==T.BUSH&&e.type!==T.TREE&&e.type!==T.WATER) {
+        frontendHeatmap[e.x][e.y] = Math.min(100, (frontendHeatmap[e.x][e.y]||0)+1);
+      }
+    }
+    
+    for (let x=0;x<COLS;x++) for (let y=0;y<ROWS;y++) if (frontendHeatmap[x][y]>0) frontendHeatmap[x][y]--;
     updateUI(d);
     render(d);
     updateCharts(d);
@@ -1165,9 +1242,6 @@ function scheduleTick() {
   }, tickDelay);
 }
 
-// ════════════════════════════════════════════════════════════════
-//  TOOLTIP on hover
-// ════════════════════════════════════════════════════════════════
 canvas.addEventListener('mousemove', (ev)=>{
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
@@ -1181,18 +1255,35 @@ canvas.addEventListener('mousemove', (ev)=>{
 
   if (fauna) {
     const sp = speciesRegistry[fauna.speciesKey];
+    const typeLabel = fauna.type===T.HERB?'Herbívoro':fauna.type===T.PRED?'Predador':fauna.type===T.OMNI?'Onívoro':fauna.type===T.INSECT?'Inseto':'Proto-Humano';
     tip.style.display='block';
     tip.style.left=(ev.clientX+16)+'px';
     tip.style.top=(ev.clientY-10)+'px';
     tip.innerHTML=`
-      <div class="tt-name">${sp?sp.name:fauna.type}</div>
+      <div class="tt-name">${sp?sp.name:typeLabel} <span style="opacity:.5;font-size:9px">[${typeLabel}]</span></div>
       Energia: ${Math.round(fauna.energy)}/100<br>
       Hidratação: ${Math.round(fauna.hydration)}/100<br>
       Velocidade: ${fauna.speed.toFixed(2)}<br>
       Percepção: ${fauna.perception.toFixed(2)}<br>
-      Inteligência: ${fauna.intelligence.toFixed(2)}<br>
-      Mutações: ${fauna.mutationCount}<br>
+      Inteligência: ${fauna.intelligence?fauna.intelligence.toFixed(2):'—'}<br>
+      Taxa de mutação: ${(fauna.mutRate*100).toFixed(1)}%<br>
+      Mutações acumuladas: ${fauna.mutationCount}<br>
       Idade: ${fauna.age}`;
+    
+    const dbp = document.getElementById('debug-panel');
+    const dbc = document.getElementById('debug-content');
+    if (dbp && dbc) {
+      dbp.style.display='block';
+      dbc.innerHTML = `<b style="color:${fauna.type===T.OMNI?'#ff9f43':fauna.type===T.PRED?'var(--pred)':'var(--herb)'}">${sp?sp.name:typeLabel}</b><br>
+        Tipo: ${typeLabel}<br>
+        Energia: <b>${Math.round(fauna.energy)}</b>/100<br>
+        Hidratação: <b>${Math.round(fauna.hydration)}</b>/100<br>
+        Velocidade: <b>${fauna.speed.toFixed(2)}</b><br>
+        Percepção: <b>${fauna.perception.toFixed(2)}</b><br>
+        Taxa de Mutação: <b>${(fauna.mutRate*100).toFixed(1)}%</b><br>
+        Mutações: <b>${fauna.mutationCount}</b><br>
+        Idade: <b>${fauna.age}</b>`;
+    }
   } else if (plant) {
     tip.style.display='block';
     tip.style.left=(ev.clientX+16)+'px';
@@ -1206,9 +1297,6 @@ canvas.addEventListener('mouseleave',()=>{
   document.getElementById('tooltip').style.display='none';
 });
 
-// ════════════════════════════════════════════════════════════════
-//  CONTROLS
-// ════════════════════════════════════════════════════════════════
 document.getElementById('btn-pp').addEventListener('click',()=>{
   if (!world.running) startSim(); else pauseSim();
 });
@@ -1230,6 +1318,57 @@ document.getElementById('btn-crisis').addEventListener('click',()=>{
   if (!world) return;
   world.entities = world.entities.filter(e=>e.type!==T.PRED);
   addLog('event:⚠ Extinção em massa: todos os predadores eliminados!', world.cycle);
+});
+
+document.getElementById('btn-heatmap').addEventListener('click',()=>{
+  showHeatmap = !showHeatmap;
+  document.getElementById('btn-heatmap').className = showHeatmap ? 'btn on' : 'btn';
+});
+
+document.getElementById('btn-biome').addEventListener('click',()=>{
+  showBiomes = !showBiomes;
+  document.getElementById('btn-biome').className = showBiomes ? 'btn on' : 'btn';
+  
+  if (showBiomes && !cachedBiomeMap) {
+    
+    cachedBiomeMap = [];
+    const rng = (x,y)=>Math.sin(x*0.13+y*0.07)*Math.cos(y*0.11-x*0.05);
+    for (let y=0;y<ROWS;y++) {
+      let row='';
+      for (let x=0;x<COLS;x++) {
+        const v = rng(x,y);
+        if (world && world.waterSources.some(w=>w.x===x&&w.y===y)) row+='W';
+        else if (v > 0.35) row+='F';
+        else if (v < -0.35) row+='D';
+        else row+='P';
+      }
+      cachedBiomeMap.push(row);
+    }
+  }
+  document.getElementById('biome-legend').style.display = showBiomes ? 'flex' : 'none';
+});
+
+document.getElementById('btn-save').addEventListener('click',()=>{
+  if (!world) return;
+  const snap = {
+    cycle: world.cycle,
+    generation: world.generation,
+    totalBorn: world.totalBorn,
+    totalDead: world.totalDead,
+    totalMutations: world.totalMutations,
+    fauna: world.fauna.map(e=>({
+      type:e.type, x:e.x, y:e.y, energy:Math.round(e.energy),
+      speed:+e.speed.toFixed(2), perception:+e.perception.toFixed(2),
+      aggression:+e.aggression.toFixed(2), mutRate:+e.mutRate.toFixed(3),
+      mutationCount:e.mutationCount, age:e.age
+    }))
+  };
+  const blob = new Blob([JSON.stringify(snap, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `lifeengine_ciclo_${world.cycle}.json`;
+  a.click();
+  addLog(`event:💾 Snapshot salvo: ${snap.fauna.length} criaturas, ciclo ${world.cycle}`, world.cycle);
 });
 
 document.getElementById('btn-drought').addEventListener('click',()=>{
@@ -1275,9 +1414,6 @@ document.getElementById('sl-temp').addEventListener('input',function(){
   if(world) { world.baseTemp=+this.value; }
 });
 
-// ════════════════════════════════════════════════════════════════
-//  INIT
-// ════════════════════════════════════════════════════════════════
 window.addEventListener('load',()=>{
   ['popChart','climChart'].forEach(id=>{
     const el=document.getElementById(id);
