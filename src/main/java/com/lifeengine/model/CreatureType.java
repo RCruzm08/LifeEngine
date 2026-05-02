@@ -2,7 +2,8 @@ package com.lifeengine.model;
 
 public enum CreatureType {
     HERBIVORE("H"),
-    PREDATOR("P");
+    PREDATOR("P"),
+    OMNIVORE("O");   
 
     public final String symbol;
 
