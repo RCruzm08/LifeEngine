@@ -48,7 +48,13 @@ public class World {
         placeCircularBiome(Biome.DESERT, (int)(width * 0.75), height / 5, 6);
         placeCircularBiome(Biome.DESERT, width / 6, (int)(height * 0.75), 5);
 
-        
+        placeCircularBiome(Biome.TUNDRA, width / 5, height / 9, 7);
+        placeCircularBiome(Biome.TUNDRA, (int)(width * 0.82), (int)(height * 0.86), 6);
+
+        placeCircularBiome(Biome.HIGHLAND, width / 2, (int)(height * 0.22), 6);
+        placeCircularBiome(Biome.HIGHLAND, (int)(width * 0.42), (int)(height * 0.72), 7);
+
+        placeCircularBiome(Biome.WETLAND, width / 2, height / 2, 8);
         placeCircularBiome(Biome.WATER, width / 2, height / 2, 4);
         placeRiver(0, height / 3, width - 1, height / 3 + 2);
     }
@@ -61,13 +67,13 @@ public class World {
     }
 
     private void placeRiver(int x1, int y1, int x2, int y2) {
-        int steps = Math.abs(x2 - x1);
+        int steps = Math.max(1, Math.abs(x2 - x1));
         for (int i = 0; i <= steps; i++) {
             int x = x1 + i;
             int yBase = y1 + (int)((double)(y2 - y1) * i / steps);
-            for (int dy = 0; dy <= 1; dy++) {
+            for (int dy = -2; dy <= 3; dy++) {
                 int y = Math.min(height - 1, Math.max(0, yBase + dy));
-                biomeGrid[x][y] = Biome.WATER;
+                biomeGrid[x][y] = Math.abs(dy) <= 1 ? Biome.WATER : Biome.WETLAND;
             }
         }
     }
@@ -243,6 +249,87 @@ public class World {
                 .filter(c -> c.getType() == CreatureType.PREDATOR)
                 .forEach(Creature::kill);
         creatures.removeIf(c -> !c.isAlive());
+    }
+
+    public int triggerBloom() {
+        int added = 0;
+        for (int i = 0; i < 90; i++) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            Biome b = biomeGrid[x][y];
+            if (b != Biome.WATER && random.nextDouble() < Math.min(1.0, b.foodMod * 0.85)) {
+                foodSources.add(new int[]{x, y});
+                added++;
+            }
+        }
+        return added;
+    }
+
+    public int addOasis() {
+        int cx;
+        int cy;
+        do {
+            cx = random.nextInt(width);
+            cy = random.nextInt(height);
+        } while (biomeGrid[cx][cy] == Biome.WATER);
+
+        int wetlandRadius = 5 + random.nextInt(4);
+        int waterRadius = Math.max(2, wetlandRadius - 3);
+        placeCircularBiome(Biome.WETLAND, cx, cy, wetlandRadius);
+        placeCircularBiome(Biome.WATER, cx, cy, waterRadius);
+
+        int waterCells = 0;
+        for (int x = Math.max(0, cx - waterRadius); x < Math.min(width, cx + waterRadius); x++) {
+            for (int y = Math.max(0, cy - waterRadius); y < Math.min(height, cy + waterRadius); y++) {
+                if (biomeGrid[x][y] == Biome.WATER) waterCells++;
+            }
+        }
+        return waterCells;
+    }
+
+    public int triggerWildfire() {
+        int cx;
+        int cy;
+        do {
+            cx = random.nextInt(width);
+            cy = random.nextInt(height);
+        } while (biomeGrid[cx][cy] == Biome.WATER || biomeGrid[cx][cy] == Biome.WETLAND);
+
+        int radius = 4 + random.nextInt(4);
+        int beforeFood = foodSources.size();
+        final int fx = cx;
+        final int fy = cy;
+        final int r2 = radius * radius;
+        foodSources.removeIf(f -> {
+            int dx = f[0] - fx;
+            int dy = f[1] - fy;
+            return dx * dx + dy * dy <= r2;
+        });
+
+        int killed = 0;
+        for (Creature c : creatures) {
+            int dx = c.getX() - cx;
+            int dy = c.getY() - cy;
+            if (dx * dx + dy * dy <= r2 && random.nextDouble() < 0.18) {
+                c.kill();
+                killed++;
+            }
+        }
+        creatures.removeIf(c -> !c.isAlive());
+        totalDead += killed;
+        return (beforeFood - foodSources.size()) + killed;
+    }
+
+    public Map<String, Long> getBiomeSummary() {
+        Map<String, Long> summary = new LinkedHashMap<>();
+        for (Biome biome : Biome.values()) summary.put(biome.name(), 0L);
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                String key = biomeGrid[x][y].name();
+                summary.put(key, summary.get(key) + 1);
+            }
+        }
+        return summary;
     }
 
     public Biome getBiomeAt(int x, int y) {

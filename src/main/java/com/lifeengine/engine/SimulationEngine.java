@@ -73,6 +73,21 @@ public class SimulationEngine {
         broadcastState(List.of("event:⚠ Crise! Todos os predadores foram eliminados."));
     }
 
+    public void triggerBloom() {
+        int added = world.triggerBloom();
+        broadcastState(List.of("ecology:🌸 Floração: " + added + " novas fontes de comida surgiram."));
+    }
+
+    public void addOasis() {
+        int cells = world.addOasis();
+        broadcastState(List.of("ecology:💧 Oásis criado: " + cells + " células de água adicionadas."));
+    }
+
+    public void triggerWildfire() {
+        int affected = world.triggerWildfire();
+        broadcastState(List.of("ecology:🔥 Incêndio: " + affected + " entidades/recursos afetados."));
+    }
+
     
     public Map<String, Object> getSnapshot() {
         List<Creature> all = world.getCreatures();
@@ -156,6 +171,9 @@ public class SimulationEngine {
                         case DESERT  -> "D";
                         case WATER   -> "W";
                         case PLAINS  -> "P";
+                        case WETLAND -> "S";
+                        case TUNDRA  -> "T";
+                        case HIGHLAND -> "M";
                     });
                 }
                 biomeRows.add(sb.toString());
@@ -187,6 +205,7 @@ public class SimulationEngine {
             payload.put("creatures",  cList);
             payload.put("foodCoords", foodList);
             payload.put("biomeMap",   biomeRows);
+            payload.put("biomeSummary", world.getBiomeSummary());
             payload.put("heatmap",    hotCells);
             payload.put("events",     events);
 

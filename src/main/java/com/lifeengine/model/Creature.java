@@ -121,7 +121,13 @@ public class Creature {
         
         Biome biome = world.getBiomeAt(x, y);
         double speedCost = 1 + (speed / 3.0);
-        double biomePenalty = biome == Biome.DESERT ? 1.5 : biome == Biome.WATER ? 2.0 : 1.0;
+        double biomePenalty = switch (biome) {
+            case DESERT -> 1.5;
+            case WATER -> 2.0;
+            case WETLAND -> 1.15;
+            case TUNDRA, HIGHLAND -> 1.3;
+            default -> 1.0;
+        };
         consumeEnergy((int) Math.round(speedCost * biomePenalty));
 
         if (age >= maxAge || energy <= 0) {

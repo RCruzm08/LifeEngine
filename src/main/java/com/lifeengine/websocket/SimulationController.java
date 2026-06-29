@@ -38,6 +38,24 @@ public class SimulationController {
         return Map.of("status", "crisis");
     }
 
+    @PostMapping("/bloom")
+    public Map<String,String> bloom() {
+        engine.triggerBloom();
+        return Map.of("status", "bloom");
+    }
+
+    @PostMapping("/oasis")
+    public Map<String,String> oasis() {
+        engine.addOasis();
+        return Map.of("status", "oasis");
+    }
+
+    @PostMapping("/wildfire")
+    public Map<String,String> wildfire() {
+        engine.triggerWildfire();
+        return Map.of("status", "wildfire");
+    }
+
     @PostMapping("/speed")
     public Map<String,String> speed(@RequestBody Map<String,Integer> body) {
         engine.setTickDelay(body.get("ms"));

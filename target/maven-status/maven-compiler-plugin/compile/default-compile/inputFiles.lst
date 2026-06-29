@@ -1,8 +1,9 @@
-C:\Users\user\Documents\LifeEngine\src\main\java\com\lifeengine\model\Creature.java
-C:\Users\user\Documents\LifeEngine\src\main\java\com\lifeengine\websocket\WebSocketConfig.java
-C:\Users\user\Documents\LifeEngine\src\main\java\com\lifeengine\websocket\SimulationController.java
-C:\Users\user\Documents\LifeEngine\src\main\java\com\lifeengine\LifeEngineApplication.java
-C:\Users\user\Documents\LifeEngine\src\main\java\com\lifeengine\engine\SimulationEngine.java
-C:\Users\user\Documents\LifeEngine\src\main\java\com\lifeengine\model\World.java
-C:\Users\user\Documents\LifeEngine\src\main\java\com\lifeengine\model\CreatureType.java
-C:\Users\user\Documents\LifeEngine\src\main\java\com\lifeengine\websocket\SimulationWebSocketHandler.java
+C:\Users\user\Documents\LifeEngine\LifeEngine\src\main\java\com\lifeengine\model\Creature.java
+C:\Users\user\Documents\LifeEngine\LifeEngine\src\main\java\com\lifeengine\model\Biome.java
+C:\Users\user\Documents\LifeEngine\LifeEngine\src\main\java\com\lifeengine\websocket\WebSocketConfig.java
+C:\Users\user\Documents\LifeEngine\LifeEngine\src\main\java\com\lifeengine\model\CreatureType.java
+C:\Users\user\Documents\LifeEngine\LifeEngine\src\main\java\com\lifeengine\websocket\SimulationController.java
+C:\Users\user\Documents\LifeEngine\LifeEngine\src\main\java\com\lifeengine\model\World.java
+C:\Users\user\Documents\LifeEngine\LifeEngine\src\main\java\com\lifeengine\engine\SimulationEngine.java
+C:\Users\user\Documents\LifeEngine\LifeEngine\src\main\java\com\lifeengine\LifeEngineApplication.java
+C:\Users\user\Documents\LifeEngine\LifeEngine\src\main\java\com\lifeengine\websocket\SimulationWebSocketHandler.java

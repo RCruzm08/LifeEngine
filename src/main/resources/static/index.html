@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Life Engine  — Ecosystem</title>
-<link href="https:">
+<title>Life Engine — Living Ecosystem</title>
 <style>
 :root {
-  --bg:#04080f;--s1:#080f1a;--s2:#0d1620;--s3:#12202e;
-  --border:rgba(120,200,255,0.07);--border2:rgba(120,200,255,0.15);
-  --text:#c8ddf0;--muted:#4a6a85;--dim:#1e3048;
+  --bg:#07110d;--s1:#0d1713;--s2:#13221b;--s3:#1a2d24;
+  --border:rgba(162,203,178,0.09);--border2:rgba(162,203,178,0.18);
+  --text:#d9eadf;--muted:#7e9a86;--dim:#3e5345;
   --plant:#2ecc40;--plantd:rgba(46,204,64,0.12);--plantm:rgba(46,204,64,0.4);
   --herb:#00e676;--herbd:rgba(0,230,118,0.1);--herbm:rgba(0,230,118,0.35);
   --pred:#ff4d6d;--predd:rgba(255,77,109,0.1);--predm:rgba(255,77,109,0.35);
@@ -22,7 +21,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden;min-height:100vh}
+body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,sans-serif;overflow-x:hidden;min-height:100vh}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-thumb{background:var(--dim);border-radius:2px}
 
@@ -34,9 +33,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 
 
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(0,150,255,0.04),transparent),
+  background-image:linear-gradient(140deg,rgba(39,92,58,0.14),transparent 34%,rgba(160,92,45,0.08) 72%,transparent),
     linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
-  background-size:100% 100%,32px 32px,32px 32px}
+  background-size:100% 100%,42px 42px,42px 42px}
 
 .wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
 
@@ -50,11 +49,11 @@ header{padding:0 40px;height:56px;display:flex;align-items:center;justify-conten
 .logo-mark::before{content:'';position:absolute;inset:0;border-radius:8px;
   background:radial-gradient(circle,var(--plantm),transparent 70%);animation:lp 3s ease-in-out infinite}
 @keyframes lp{0%,100%{opacity:.3}50%{opacity:.8}}
-.logo-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.08em}
+.logo-name{font-size:14px;font-weight:800;letter-spacing:0.08em}
 .logo-ver{font-size:9px;color:var(--muted);letter-spacing:0.2em;margin-top:1px}
 .hdr-center{display:flex;align-items:center;gap:20px}
 .hdr-stat{text-align:center}
-.hdr-val{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;font-variant-numeric:tabular-nums}
+.hdr-val{font-family:"Cascadia Mono","Consolas",monospace;font-size:15px;font-weight:800;font-variant-numeric:tabular-nums}
 .hdr-key{font-size:7px;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase}
 .hdr-divider{width:1px;height:28px;background:var(--border2)}
 .pill{display:flex;align-items:center;gap:6px;font-size:8px;letter-spacing:0.12em;
@@ -76,10 +75,17 @@ header{padding:0 40px;height:56px;display:flex;align-items:center;justify-conten
 .sdot.paused{background:#ffb830;animation:none}
 .sstate{color:var(--plant);transition:color .3s}
 .sstate.paused{color:#ffb830}
-#simCanvas{display:block;width:100%;image-rendering:pixelated;cursor:crosshair}
+#simCanvas{display:block;width:100%;height:auto;image-rendering:auto;cursor:crosshair;background:#07110d}
 .canvas-footer{padding:8px 16px;display:flex;gap:16px;border-top:1px solid var(--border);flex-wrap:wrap}
 .leg{display:flex;align-items:center;gap:5px;font-size:8px;letter-spacing:0.08em;color:var(--muted)}
 .ld{width:7px;height:7px;border-radius:50%}
+.weather-strip{padding:8px 16px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:rgba(8,18,13,0.72)}
+.weather-chip{border:1px solid var(--border2);border-radius:6px;padding:6px 8px;font-size:8px;letter-spacing:.08em;color:var(--muted);background:rgba(255,255,255,0.025)}
+.weather-chip strong{color:var(--text);font-weight:800}
+.biome-bars{display:flex;flex-direction:column;gap:5px;margin-top:9px}
+.biome-bar{display:grid;grid-template-columns:62px 1fr 32px;align-items:center;gap:6px;font-size:7px;letter-spacing:.08em;color:var(--muted)}
+.biome-bar-track{height:5px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden}
+.biome-bar-fill{height:100%;border-radius:4px;transition:width .35s}
 
 
 .sidebar{display:flex;flex-direction:column;gap:0;overflow-y:auto;max-height:calc(100vh - 56px)}
@@ -87,11 +93,11 @@ header{padding:0 40px;height:56px;display:flex;align-items:center;justify-conten
 .panel{padding:14px 16px;border-bottom:1px solid var(--border)}
 .panel-hd{font-size:7px;letter-spacing:0.22em;color:var(--muted);text-transform:uppercase;
   margin-bottom:12px;display:flex;align-items:center;gap:6px}
-.panel-hd::before{content:'
+.panel-hd::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--plant);box-shadow:0 0 10px var(--plantm)}
 
 
 .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:10px}
-.btn{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.05em;
+.btn{font-family:"Cascadia Mono","Consolas",monospace;font-size:9px;letter-spacing:0.05em;
   padding:8px 10px;border-radius:6px;cursor:pointer;transition:all .15s;
   border:1px solid var(--border2);background:transparent;color:var(--text)}
 .btn:hover{background:var(--s2);border-color:rgba(120,200,255,0.25);transform:translateY(-1px)}
@@ -114,7 +120,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.35)}
 
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .sc{background:var(--s2);border-radius:6px;padding:8px 10px;border:1px solid var(--border)}
-.sc-val{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}
+.sc-val{font-family:"Cascadia Mono","Consolas",monospace;font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}
 .sc-key{font-size:7px;letter-spacing:0.14em;color:var(--muted);margin-top:3px;text-transform:uppercase}
 
 
@@ -132,7 +138,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.35)}
   background:linear-gradient(to right,var(--cold),#7cfc00,var(--hot))}
 .temp-cursor{position:absolute;top:-2px;width:10px;height:10px;border-radius:50%;
   background:#fff;border:2px solid var(--bg);transition:left .5s;transform:translateX(-50%)}
-.temp-val{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;text-align:center;margin-top:6px}
+.temp-val{font-family:"Cascadia Mono","Consolas",monospace;font-size:20px;font-weight:800;text-align:center;margin-top:6px}
 
 
 .charts{display:flex;flex-direction:column;gap:8px}
@@ -150,13 +156,13 @@ canvas.chart{display:block;width:100%;height:70px}
 .le-c{color:var(--dim);min-width:38px;flex-shrink:0}
 .le.birth{color:var(--plant)}.le.death{color:var(--pred)}
 .le.mutate{color:var(--mut)}.le.event{color:var(--water)}
-.le.evolve{color:var(--hum)}.le.climate{color:#ffb830}
+.le.evolve{color:var(--hum)}.le.climate{color:#ffb830}.le.weather{color:#80e6ff}.le.ecology{color:#8bff9f}
 
 
 #tooltip{position:fixed;pointer-events:none;z-index:500;background:var(--s1);
   border:1px solid var(--border2);border-radius:8px;padding:8px 12px;font-size:8px;
   line-height:1.8;color:var(--text);display:none;max-width:180px;backdrop-filter:blur(10px)}
-#tooltip .tt-name{font-family:'Syne',sans-serif;font-size:11px;font-weight:800;margin-bottom:4px}
+#tooltip .tt-name{font-size:11px;font-weight:800;margin-bottom:4px}
 
 
 .info-section{padding:40px;border-top:1px solid var(--border)}
@@ -164,7 +170,7 @@ canvas.chart{display:block;width:100%;height:70px}
 .info-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:18px;transition:all .2s}
 .info-card:hover{border-color:var(--border2);transform:translateY(-2px)}
 .info-icon{font-size:20px;margin-bottom:10px}
-.info-card h3{font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.04em;margin-bottom:8px}
+.info-card h3{font-size:11px;font-weight:800;letter-spacing:.04em;margin-bottom:8px}
 .info-card p{font-size:9px;line-height:1.9;color:var(--muted)}
 .info-card strong{color:var(--text)}
 
@@ -228,6 +234,13 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
       <div class="leg"><div class="ld" style="background:#f9ca24"></div>Inseto</div>
       <div class="leg"><div class="ld" style="background:#b97bff"></div>Proto-Humano</div>
       <div class="leg"><div class="ld" style="background:#00c8f0"></div>Água</div>
+      <div class="leg"><div class="ld" style="background:#ff7a21"></div>Fogo</div>
+    </div>
+    <div class="weather-strip">
+      <div class="weather-chip">Estação <strong id="map-season">—</strong></div>
+      <div class="weather-chip">Clima <strong id="map-weather">Calmo</strong></div>
+      <div class="weather-chip">Biomas <strong id="map-biomes">visíveis</strong></div>
+      <div class="weather-chip">Luz <strong id="map-light">Dia</strong></div>
     </div>
   </div>
 
@@ -244,8 +257,14 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
         <button class="btn info" id="btn-drought">💧 Seca</button>
         <button class="btn" id="btn-cold" style="border-color:var(--waterm);color:var(--cold)">❄ Glacial</button>
         <button class="btn" id="btn-heat" style="border-color:var(--predm);color:var(--hot)">🔥 Calor</button>
+        <button class="btn" id="btn-hurricane" style="border-color:rgba(128,230,255,0.42);color:#80e6ff">🌀 Furacão</button>
+        <button class="btn info" id="btn-rain">🌧 Chuva</button>
+        <button class="btn" id="btn-bloom" style="border-color:var(--plantm);color:var(--plant)">🌸 Floração</button>
+        <button class="btn warn" id="btn-fire">🔥 Incêndio</button>
+        <button class="btn info" id="btn-oasis">💧 Oásis</button>
         <button class="btn" id="btn-heatmap" style="border-color:rgba(255,100,0,0.4);color:#ff6b00">🌡 Heatmap</button>
         <button class="btn" id="btn-biome" style="border-color:rgba(0,200,100,0.4);color:#00c864">🗺 Biomas</button>
+        <button class="btn" id="btn-trails" style="border-color:rgba(190,255,180,0.32);color:#baffb0">〽 Trilhas</button>
         <button class="btn" id="btn-save" style="border-color:var(--border2);color:var(--water)">💾 Salvar</button>
       </div>
       <div class="sliders">
@@ -254,6 +273,18 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
           <input type="range" id="sl-spd" min="30" max="800" value="200" step="10">
         </div>
       </div>
+    </div>
+
+    
+    <div class="panel">
+      <div class="panel-hd">ecossistema</div>
+      <div class="stats-grid">
+        <div class="sc"><div class="sc-val" id="st-health" style="color:var(--plant)">—</div><div class="sc-key">Saúde</div></div>
+        <div class="sc"><div class="sc-val" id="st-biomass" style="color:#9adf65">—</div><div class="sc-key">Biomassa</div></div>
+        <div class="sc"><div class="sc-val" id="st-dominant-biome" style="color:#80e6ff">—</div><div class="sc-key">Bioma dom.</div></div>
+        <div class="sc"><div class="sc-val" id="st-time" style="color:#ffd66e">—</div><div class="sc-key">Luz</div></div>
+      </div>
+      <div class="biome-bars" id="biome-bars"></div>
     </div>
 
     
@@ -290,6 +321,7 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
         <div class="sc"><div class="sc-val" id="st-season" style="color:var(--plant)">—</div><div class="sc-key">Estação</div></div>
         <div class="sc"><div class="sc-val" id="st-water-lvl" style="color:var(--water)">—</div><div class="sc-key">Água</div></div>
+        <div class="sc" style="grid-column:1/-1"><div class="sc-val" id="st-weather" style="color:#80e6ff">Calmo</div><div class="sc-key">Sistema climático</div></div>
       </div>
     </div>
 
@@ -320,17 +352,18 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
       <div class="panel-hd">população</div>
       <div class="charts">
         <div class="cpanel">
-          <div class="cpanel-hd">
+          <div class="cpanel-hd">Tendência populacional</div>
           <canvas class="chart" id="popChart"></canvas>
           <div class="chart-leg">
             <div class="cl"><div class="cl-dot" style="background:var(--herb)"></div>Herbívoros</div>
             <div class="cl"><div class="cl-dot" style="background:var(--pred)"></div>Predadores</div>
+            <div class="cl"><div class="cl-dot" style="background:#ff9f43"></div>Onívoros</div>
             <div class="cl"><div class="cl-dot" style="background:var(--ins)"></div>Insetos</div>
             <div class="cl"><div class="cl-dot" style="background:var(--hum)"></div>Proto-Hum.</div>
           </div>
         </div>
         <div class="cpanel">
-          <div class="cpanel-hd">
+          <div class="cpanel-hd">Temperatura / água</div>
           <canvas class="chart" id="climChart"></canvas>
         </div>
       </div>
@@ -372,16 +405,19 @@ footer p{font-size:8px;letter-spacing:.1em;color:var(--dim)}
     <div class="info-card">
       <div class="info-icon">🌡️</div>
       <h3>Clima & Hidratação</h3>
-      <p>Temperatura varia por estação e afeta metabolismo de todas as espécies. Cada criatura precisa de <strong>hidratação</strong> — busca fontes de água periodicamente. Secas e glaciações são eventos de extinção em massa.</p>
+      <p>Temperatura, chuva, seca, frentes frias e <strong>furacões visíveis no mapa</strong> afetam metabolismo, hidratação, crescimento vegetal e deslocamento das criaturas.</p>
     </div>
   </div>
 </div>
 
 <div class="biome-legend" id="biome-legend" style="display:none;padding:8px 16px;font-size:9px;color:var(--muted);gap:14px;flex-wrap:wrap;border-top:1px solid var(--border)">
-  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:rgba(0,120,60,0.5);border-radius:2px"></div>Floresta (comida ↑, vel normal)</div>
-  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:rgba(200,160,60,0.5);border-radius:2px"></div>Deserto (comida ↓, vel ↓, calor ↑)</div>
-  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:rgba(0,140,220,0.5);border-radius:2px"></div>Água (quase intransponível)</div>
-  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:rgba(80,120,60,0.3);border-radius:2px"></div>Planície (vel ↑, comida normal)</div>
+  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#1b5e37;border-radius:2px"></div>Floresta (comida ↑)</div>
+  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#8d7241;border-radius:2px"></div>Deserto (sede ↑)</div>
+  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#0b718f;border-radius:2px"></div>Água (barreira natural)</div>
+  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#496f35;border-radius:2px"></div>Planície (movimento ↑)</div>
+  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#246954;border-radius:2px"></div>Pantanal (hidratação ↑)</div>
+  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#6d8985;border-radius:2px"></div>Tundra (frio ↑)</div>
+  <div style="display:flex;align-items:center;gap:5px"><div style="width:10px;height:10px;background:#5b625b;border-radius:2px"></div>Montanha (movimento ↓)</div>
 </div>
 
 <footer>
@@ -408,7 +444,7 @@ const T = {
 
 
 const COL = {
-  bg:'#04080f', grid:'rgba(120,200,255,0.025)',
+  bg:'#07110d', grid:'rgba(215,244,220,0.035)',
   [T.GRASS]:'#2ecc40', [T.BUSH]:'#27ae60', [T.TREE]:'#1a7a32',
   [T.HERB]:'#00e676', [T.PRED]:'#ff4d6d',
   [T.OMNI]:'#ff9f43',
@@ -421,8 +457,50 @@ const COL = {
   }
 };
 
-const SEASONS = ['Primavera','Verão','Outono','Inverno'];
-const SEASON_TEMP_MOD = [5, 12, -2, -15]; 
+const BIOME = {
+  FOREST:'F',
+  DESERT:'D',
+  WATER:'W',
+  PLAINS:'P',
+  WETLAND:'S',
+  TUNDRA:'T',
+  HIGHLAND:'M'
+};
+
+const BIOME_DEFS = {
+  [BIOME.FOREST]:  {name:'Floresta',   base:'#1b5e37', accent:'#4ec96d', plant:1.55, drain:-0.08, speed:0.95},
+  [BIOME.DESERT]:  {name:'Deserto',    base:'#8d7241', accent:'#e1b95c', plant:0.32, drain:0.42,  speed:0.72},
+  [BIOME.WATER]:   {name:'Água',       base:'#0b718f', accent:'#69d7ff', plant:0.00, drain:0.00,  speed:0.20},
+  [BIOME.PLAINS]:  {name:'Planície',   base:'#496f35', accent:'#9acb65', plant:1.00, drain:0.00,  speed:1.12},
+  [BIOME.WETLAND]: {name:'Pantanal',   base:'#246954', accent:'#8be4b2', plant:1.25, drain:-0.18, speed:0.82},
+  [BIOME.TUNDRA]:  {name:'Tundra',     base:'#6d8985', accent:'#d6f4ef', plant:0.56, drain:0.25,  speed:0.76},
+  [BIOME.HIGHLAND]:{name:'Montanha',   base:'#5b625b', accent:'#c3cec3', plant:0.62, drain:0.18,  speed:0.70}
+};
+
+const BIOME_ORDER = [BIOME.FOREST, BIOME.PLAINS, BIOME.WETLAND, BIOME.DESERT, BIOME.TUNDRA, BIOME.HIGHLAND, BIOME.WATER];
+
+const SEASONS = [
+  {name:'Primavera', icon:'🌱', temp:5,  rain:1.25, tint:'rgba(88,204,112,0.08)'},
+  {name:'Verão',     icon:'☀', temp:12, rain:0.75, tint:'rgba(255,178,72,0.08)'},
+  {name:'Outono',    icon:'🍂', temp:-2, rain:0.95, tint:'rgba(218,120,54,0.08)'},
+  {name:'Inverno',   icon:'❄', temp:-15,rain:0.70, tint:'rgba(114,206,255,0.09)'}
+];
+
+const WEATHER_DEFS = {
+  CALM:{label:'Calmo', color:'#7e9a86'},
+  RAIN:{label:'Chuva', color:'#80e6ff'},
+  HEAT:{label:'Onda de calor', color:'#ff8a45'},
+  COLD:{label:'Frente fria', color:'#8bd9ff'},
+  HURRICANE:{label:'Furacão', color:'#b9f5ff'}
+};
+
+const LIGHT_PHASES = [
+  {name:'Madrugada', icon:'🌘', color:'#8bd9ff'},
+  {name:'Manhã', icon:'🌅', color:'#ffd66e'},
+  {name:'Dia', icon:'☀', color:'#fff4a2'},
+  {name:'Entardecer', icon:'🌇', color:'#ff9c5f'},
+  {name:'Noite', icon:'🌙', color:'#b9c8ff'}
+];
 
 let speciesRegistry = {};
 let speciesCounter = 0;
@@ -434,7 +512,12 @@ function registerSpecies(type, traits) {
     speciesRegistry[key] = {
       id: speciesCounter, type, key,
       name: generateSpeciesName(type, speciesCounter),
-      count: 0, firstSeen: world ? world.cycle : 0
+      count: 0, firstSeen: world ? world.cycle : 0,
+      visual: {
+        hueShift: (speciesCounter * 37) % 42 - 21,
+        scale: 0.88 + ((speciesCounter * 17) % 28) / 100,
+        pattern: ['limpo','listrado','anelado','pintado'][speciesCounter % 4]
+      }
     };
   }
   return speciesRegistry[key];
@@ -554,44 +637,409 @@ class World {
     this.droughtActive = false;
     this.tempOverride = null;
     this.tempOverrideTimer = 0;
+    this.biomeMap = [];
+    this.weather = null;
+    this.weatherSeed = Math.random() * 1000;
+    this.DAY_LEN = 520;
+    this.fireCells = [];
+    this.fxBursts = [];
+    this.bloomTimer = 0;
+  }
+
+  createWaterSystems() {
+    const seen = new Set();
+    const add = (x, y, volume=100) => {
+      x = this.clamp(x, 0, COLS-1);
+      y = this.clamp(y, 0, ROWS-1);
+      const key = `${x},${y}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      const maxVolume = volume + Math.random()*35;
+      this.waterSources.push({
+        x, y,
+        volume:maxVolume,
+        maxVolume,
+        refillRate:0.18 + Math.random()*0.38
+      });
+    };
+
+    const addPatch = (cx, cy, rx, ry, volume=105) => {
+      for (let dx=-rx; dx<=rx; dx++) for (let dy=-ry; dy<=ry; dy++) {
+        const d = (dx*dx)/(rx*rx) + (dy*dy)/(ry*ry);
+        if (d <= 1 + Math.random()*0.12) add(cx+dx, cy+dy, volume);
+      }
+    };
+
+    let riverY = 14 + Math.floor(Math.random()*18);
+    for (let x=0; x<COLS; x++) {
+      riverY += Math.sin((x+this.weatherSeed)*0.08)*0.18 + (Math.random()-0.5)*0.22;
+      const y = this.clamp(Math.round(riverY + Math.sin(x*0.035)*9), 6, ROWS-7);
+      const width = 1 + Math.floor((Math.sin(x*0.11)+1)*1.1);
+      for (let dy=-width; dy<=width; dy++) add(x, y+dy, 115);
+    }
+
+    for (let i=0; i<9; i++) {
+      const cx = 8 + Math.floor(Math.random()*(COLS-16));
+      const cy = 8 + Math.floor(Math.random()*(ROWS-16));
+      addPatch(cx, cy, 3+Math.floor(Math.random()*5), 2+Math.floor(Math.random()*4), 90);
+    }
+  }
+
+  generateBiomes(waterSet) {
+    this.biomeMap = [];
+    for (let y=0; y<ROWS; y++) {
+      const row = [];
+      for (let x=0; x<COLS; x++) {
+        if (waterSet.has(`${x},${y}`)) {
+          row.push(BIOME.WATER);
+          continue;
+        }
+
+        const lat = Math.abs((y / ROWS) - 0.52) * 2;
+        const moisture =
+          0.48
+          + Math.sin((x+this.weatherSeed)*0.055) * 0.24
+          + Math.cos((y-this.weatherSeed)*0.075) * 0.20
+          + Math.sin((x+y)*0.038) * 0.14
+          + (this.nearWater(x,y,4,waterSet) ? 0.26 : 0);
+        const heat =
+          0.72 - lat * 0.48
+          + Math.sin((x-this.weatherSeed)*0.032) * 0.16
+          + Math.cos(y*0.047) * 0.10;
+        const elevation =
+          0.50
+          + Math.sin(x*0.083 + y*0.021) * 0.22
+          + Math.cos(x*0.024 - y*0.092) * 0.22;
+
+        let biome = BIOME.PLAINS;
+        if (elevation > 0.82 && !this.nearWater(x,y,2,waterSet)) biome = BIOME.HIGHLAND;
+        else if (heat < 0.27) biome = BIOME.TUNDRA;
+        else if (this.nearWater(x,y,3,waterSet) && moisture > 0.52) biome = BIOME.WETLAND;
+        else if (heat > 0.58 && moisture < 0.32) biome = BIOME.DESERT;
+        else if (moisture > 0.68) biome = BIOME.FOREST;
+        else if (heat > 0.68 && moisture < 0.42) biome = BIOME.DESERT;
+        row.push(biome);
+      }
+      this.biomeMap.push(row);
+    }
+  }
+
+  nearWater(x, y, range, waterSet) {
+    for (let dx=-range; dx<=range; dx++) for (let dy=-range; dy<=range; dy++) {
+      if (dx*dx + dy*dy <= range*range && waterSet.has(`${x+dx},${y+dy}`)) return true;
+    }
+    return false;
+  }
+
+  biomeAt(x, y) {
+    return this.biomeMap[this.clamp(Math.round(y),0,ROWS-1)]?.[this.clamp(Math.round(x),0,COLS-1)] || BIOME.PLAINS;
+  }
+
+  biomeDef(x, y) {
+    return BIOME_DEFS[this.biomeAt(x,y)] || BIOME_DEFS[BIOME.PLAINS];
+  }
+
+  isWater(x, y) {
+    return this.biomeAt(x,y) === BIOME.WATER;
+  }
+
+  randomLandCell(preferPlants=false) {
+    for (let tries=0; tries<80; tries++) {
+      const x = Math.floor(Math.random()*COLS);
+      const y = Math.floor(Math.random()*ROWS);
+      const b = this.biomeAt(x,y);
+      if (b === BIOME.WATER) continue;
+      const def = BIOME_DEFS[b];
+      const fit = preferPlants ? Math.min(1, def.plant / 1.4) : Math.min(1, 0.75 + def.speed * 0.18);
+      if (Math.random() < fit) return [x,y];
+    }
+    for (let y=0; y<ROWS; y++) for (let x=0; x<COLS; x++) {
+      if (!this.isWater(x,y)) return [x,y];
+    }
+    return [Math.floor(COLS/2), Math.floor(ROWS/2)];
+  }
+
+  season() {
+    return SEASONS[this.seasonIdx];
+  }
+
+  spawnWeather(type='HURRICANE', manual=false) {
+    const season = this.season();
+    if (type === 'HURRICANE') {
+      const fromWest = Math.random() < 0.5;
+      const y = 12 + Math.random()*(ROWS-24);
+      this.weather = {
+        type:'HURRICANE',
+        x:manual ? (fromWest ? 18 : COLS-18) : (fromWest ? 8 : COLS-8),
+        y,
+        vx:fromWest ? 0.34 + Math.random()*0.24 : -0.34 - Math.random()*0.24,
+        vy:(Math.random()-0.5)*0.16,
+        radius:8 + Math.random()*5,
+        ttl:260,
+        age:0,
+        spin:Math.random()*Math.PI*2,
+        intensity:0.82 + Math.random()*0.55
+      };
+      return `weather:🌀 ${manual?'Furacão invocado':'Furacão formado'} no oceano; olho visível no mapa.`;
+    }
+
+    const rainBoost = type === 'RAIN' ? 1 : 0;
+    this.weather = {
+      type,
+      x:COLS/2,
+      y:ROWS/2,
+      vx:0,
+      vy:0,
+      radius:COLS,
+      ttl:type === 'RAIN' ? 120 + Math.floor(Math.random()*90) : 150,
+      age:0,
+      spin:0,
+      intensity:(type === 'RAIN' ? 0.7 + season.rain*0.35 : 0.85) + rainBoost*0.2
+    };
+    const label = WEATHER_DEFS[type]?.label || 'Sistema climático';
+    return `weather:${type==='RAIN'?'🌧':type==='HEAT'?'🔥':'❄'} ${label} atravessando o ecossistema.`;
+  }
+
+  updateWeather(events) {
+    if (!this.weather) {
+      const season = this.season();
+      const wetChance = 0.0025 * season.rain;
+      if (Math.random() < wetChance) events.push(this.spawnWeather('RAIN'));
+      else if (season.name === 'Verão' && Math.random() < 0.0018) events.push(this.spawnWeather('HURRICANE'));
+      else if (season.name === 'Verão' && Math.random() < 0.0016) events.push(this.spawnWeather('HEAT'));
+      else if (season.name === 'Inverno' && Math.random() < 0.0018) events.push(this.spawnWeather('COLD'));
+      return;
+    }
+
+    const w = this.weather;
+    w.age++;
+    w.ttl--;
+    w.spin += (w.type === 'HURRICANE' ? 0.18 : 0.04) * w.intensity;
+    w.x += w.vx || 0;
+    w.y += (w.vy || 0) + Math.sin((w.age+this.weatherSeed)*0.045)*0.06;
+
+    if (w.type === 'RAIN') {
+      this.currentTemp -= 0.035 * w.intensity;
+      for (const src of this.waterSources) src.volume = Math.min(src.maxVolume, src.volume + 0.16*w.intensity);
+    } else if (w.type === 'HEAT') {
+      this.currentTemp += 0.05 * w.intensity;
+      for (const src of this.waterSources) src.volume = Math.max(0, src.volume - 0.035*w.intensity);
+    } else if (w.type === 'COLD') {
+      this.currentTemp -= 0.055 * w.intensity;
+    } else if (w.type === 'HURRICANE') {
+      this.currentTemp -= 0.018 * w.intensity;
+      const r2 = w.radius*w.radius;
+      for (const src of this.waterSources) {
+        const dx = src.x - w.x, dy = src.y - w.y;
+        if (dx*dx + dy*dy < r2*2.3) src.volume = Math.min(src.maxVolume, src.volume + 0.34*w.intensity);
+      }
+      for (const e of this.entities) {
+        const dx = e.x - w.x, dy = e.y - w.y;
+        const d2 = dx*dx + dy*dy;
+        if (d2 > r2) continue;
+        if (e.type === T.GRASS || e.type === T.BUSH || e.type === T.TREE) {
+          e.energy -= (e.type === T.TREE ? 0.28 : 0.42) * w.intensity;
+          continue;
+        }
+        const angle = Math.atan2(dy, dx) + Math.PI/2;
+        if (Math.random() < 0.35) {
+          this.moveEntity(e, e.x + Math.cos(angle)*2, e.y + Math.sin(angle)*2);
+        }
+        e.energy -= 0.22*w.intensity;
+        e.hydration = Math.min(100, e.hydration + 0.18*w.intensity);
+      }
+    }
+
+    if (w.ttl <= 0 || w.x < -24 || w.x > COLS+24 || w.y < -18 || w.y > ROWS+18) {
+      events.push(`weather:${w.type==='HURRICANE'?'🌀':'🌤'} ${WEATHER_DEFS[w.type]?.label || 'Sistema'} dissipado.`);
+      this.weather = null;
+    }
+  }
+
+  weatherLabel() {
+    if (!this.weather) return WEATHER_DEFS.CALM.label;
+    const base = WEATHER_DEFS[this.weather.type]?.label || 'Sistema';
+    if (this.weather.type === 'HURRICANE') return `${base} ${Math.round(this.weather.intensity*100)}%`;
+    return base;
+  }
+
+  lightPhase() {
+    return (this.cycle % this.DAY_LEN) / this.DAY_LEN;
+  }
+
+  lightInfo() {
+    const p = this.lightPhase();
+    if (p < 0.18) return LIGHT_PHASES[0];
+    if (p < 0.32) return LIGHT_PHASES[1];
+    if (p < 0.68) return LIGHT_PHASES[2];
+    if (p < 0.82) return LIGHT_PHASES[3];
+    return LIGHT_PHASES[4];
+  }
+
+  biomeCounts() {
+    const counts = Object.fromEntries(BIOME_ORDER.map(b=>[b,0]));
+    for (const row of this.biomeMap) for (const b of row) counts[b] = (counts[b] || 0) + 1;
+    return counts;
+  }
+
+  dominantBiome() {
+    const counts = this.biomeCounts();
+    return BIOME_ORDER
+      .filter(b=>b!==BIOME.WATER)
+      .sort((a,b)=>(counts[b]||0)-(counts[a]||0))[0] || BIOME.PLAINS;
+  }
+
+  ecosystemHealth(plants, totalPop, waterLevel) {
+    const diversity = new Set(this.fauna.map(e=>e.speciesKey)).size;
+    const firePenalty = Math.min(24, this.fireCells.length * 0.75);
+    const plantScore = Math.min(34, plants / 16);
+    const waterScore = Math.min(24, waterLevel * 0.24);
+    const popScore = Math.min(24, totalPop / 7);
+    const diversityScore = Math.min(18, diversity * 1.4);
+    return Math.max(0, Math.min(100, Math.round(plantScore + waterScore + popScore + diversityScore - firePenalty)));
+  }
+
+  hasWaterSource(x, y) {
+    return this.waterSources.some(w=>w.x===x && w.y===y);
+  }
+
+  rebuildBiomeMap() {
+    const waterSet = new Set(this.waterSources.filter(w=>w.volume>0).map(w=>`${w.x},${w.y}`));
+    this.generateBiomes(waterSet);
+  }
+
+  addOasis(manual=false) {
+    const [cx, cy] = this.randomLandCell(false);
+    const rx = 4 + Math.floor(Math.random()*5);
+    const ry = 3 + Math.floor(Math.random()*4);
+    for (let dx=-rx; dx<=rx; dx++) for (let dy=-ry; dy<=ry; dy++) {
+      const d = (dx*dx)/(rx*rx) + (dy*dy)/(ry*ry);
+      if (d > 1.05) continue;
+      const x = this.clamp(cx+dx,0,COLS-1), y = this.clamp(cy+dy,0,ROWS-1);
+      if (!this.hasWaterSource(x,y)) {
+        const maxVolume = 105 + Math.random()*45;
+        this.waterSources.push({x,y,volume:maxVolume,maxVolume,refillRate:0.24 + Math.random()*0.22});
+      }
+    }
+    this.rebuildBiomeMap();
+    this.fxBursts.push({type:'OASIS', x:cx, y:cy, ttl:120, age:0, radius:Math.max(rx,ry)+3});
+    return `ecology:${manual?'💧 Oásis criado':'💧 Novo oásis'}; pantanal se expandindo ao redor da água.`;
+  }
+
+  triggerBloom(manual=false) {
+    this.bloomTimer = 140;
+    let created = 0;
+    for (let i=0; i<120 && this.plants.length + created < 820; i++) {
+      const [x,y] = this.randomLandCell(true);
+      const b = this.biomeAt(x,y);
+      const def = BIOME_DEFS[b];
+      if (b === BIOME.WATER || Math.random() > Math.min(1, def.plant * 0.72)) continue;
+      const r = Math.random();
+      this.entities.push(new Entity(r<0.5?T.GRASS:r<0.78?T.BUSH:T.TREE, x, y, {energy:35 + Math.random()*50}));
+      created++;
+      if (created % 18 === 0) this.fxBursts.push({type:'BLOOM', x, y, ttl:105, age:0, radius:4 + Math.random()*5});
+    }
+    return `ecology:${manual?'🌸 Floração induzida':'🌸 Floração natural'}: ${created} novas plantas germinaram.`;
+  }
+
+  igniteWildfire(manual=false) {
+    let cx=0, cy=0;
+    for (let tries=0; tries<80; tries++) {
+      const [x,y] = this.randomLandCell(false);
+      const b = this.biomeAt(x,y);
+      if (b === BIOME.FOREST || b === BIOME.PLAINS || b === BIOME.DESERT) { cx=x; cy=y; break; }
+      cx=x; cy=y;
+    }
+    const added = new Set(this.fireCells.map(f=>`${f.x},${f.y}`));
+    for (let i=0; i<22; i++) {
+      const x = this.clamp(cx + Math.floor(Math.random()*9)-4, 0, COLS-1);
+      const y = this.clamp(cy + Math.floor(Math.random()*9)-4, 0, ROWS-1);
+      if (this.isWater(x,y)) continue;
+      const key = `${x},${y}`;
+      if (added.has(key)) continue;
+      added.add(key);
+      this.fireCells.push({x,y,ttl:90+Math.floor(Math.random()*90),intensity:0.7+Math.random()*0.8});
+    }
+    this.fxBursts.push({type:'FIRE', x:cx, y:cy, ttl:120, age:0, radius:8});
+    return `ecology:${manual?'🔥 Incêndio iniciado':'🔥 Incêndio espontâneo'} em ${BIOME_DEFS[this.biomeAt(cx,cy)]?.name || 'bioma seco'}.`;
+  }
+
+  updateFire(events) {
+    if (!this.fireCells.length) return;
+    const raining = this.weather && (this.weather.type === 'RAIN' || this.weather.type === 'HURRICANE');
+    const heatBoost = this.weather?.type === 'HEAT';
+    const next = [];
+    const occupied = new Set();
+
+    for (const f of this.fireCells) {
+      f.ttl -= raining ? 4 : 1;
+      f.intensity *= raining ? 0.965 : 0.994;
+      if (heatBoost) f.intensity = Math.min(2.2, f.intensity + 0.012);
+      if (f.ttl <= 0 || f.intensity < 0.12 || this.isWater(f.x,f.y)) continue;
+
+      const biome = this.biomeAt(f.x,f.y);
+      const burnRate = biome === BIOME.FOREST ? 1.8 : biome === BIOME.PLAINS ? 1.15 : biome === BIOME.DESERT ? 0.55 : 0.35;
+      for (const e of this.entities) {
+        const d = Math.abs(e.x-f.x)+Math.abs(e.y-f.y);
+        if (d > 1) continue;
+        if (e.type===T.GRASS || e.type===T.BUSH || e.type===T.TREE) {
+          e.energy -= burnRate * f.intensity;
+        } else {
+          e.energy -= 0.36 * f.intensity;
+          e.hydration -= 0.24 * f.intensity;
+          if (Math.random() < 0.16) this.stepAway(e, f.x, f.y);
+        }
+      }
+
+      if (!raining && Math.random() < 0.035 * f.intensity * BIOME_DEFS[biome].plant) {
+        const nx = this.clamp(f.x + Math.floor(Math.random()*3)-1, 0, COLS-1);
+        const ny = this.clamp(f.y + Math.floor(Math.random()*3)-1, 0, ROWS-1);
+        const key = `${nx},${ny}`;
+        if (!this.isWater(nx,ny) && !occupied.has(key)) {
+          occupied.add(key);
+          next.push({x:nx,y:ny,ttl:70+Math.floor(Math.random()*70),intensity:0.45+Math.random()*0.7});
+        }
+      }
+      const key = `${f.x},${f.y}`;
+      occupied.add(key);
+      next.push(f);
+    }
+
+    if (this.fireCells.length && !next.length) events.push('ecology:🌧 Incêndios controlados pela umidade.');
+    this.fireCells = next.slice(0, 180);
   }
 
   init() {
     this.entities = [];
     this.waterSources = [];
+    this.biomeMap = [];
+    this.weather = null;
+    this.weatherSeed = Math.random() * 1000;
+    this.fireCells = [];
+    this.fxBursts = [];
+    this.bloomTimer = 0;
     speciesRegistry = {}; speciesCounter = 0;
 
-    
-    for (let i = 0; i < 12; i++) {
-      const wx = 5 + Math.floor(Math.random()*(COLS-10));
-      const wy = 5 + Math.floor(Math.random()*(ROWS-10));
-      const size = 3 + Math.floor(Math.random()*5);
-      for (let dx=-size;dx<=size;dx++) for (let dy=-size;dy<=size;dy++) {
-        if (dx*dx+dy*dy <= size*size && wx+dx>=0 && wx+dx<COLS && wy+dy>=0 && wy+dy<ROWS) {
-          this.waterSources.push({x:wx+dx, y:wy+dy, volume:100, maxVolume:100});
-        }
-      }
-    }
-
-    
+    this.createWaterSystems();
     const waterSet = new Set(this.waterSources.map(w=>`${w.x},${w.y}`));
+    this.generateBiomes(waterSet);
 
     
     for (let i=0;i<300;i++) {
-      let x,y,tries=0;
-      do { x=Math.floor(Math.random()*COLS); y=Math.floor(Math.random()*ROWS); tries++; }
-      while (waterSet.has(`${x},${y}`) && tries<10);
+      const [x,y] = this.randomLandCell(true);
       const r = Math.random();
-      const t = r<0.6?T.GRASS:r<0.85?T.BUSH:T.TREE;
+      const b = this.biomeAt(x,y);
+      const forestBias = b === BIOME.FOREST || b === BIOME.WETLAND;
+      const t = forestBias
+        ? (r<0.45?T.GRASS:r<0.72?T.BUSH:T.TREE)
+        : (r<0.68?T.GRASS:r<0.9?T.BUSH:T.TREE);
       this.entities.push(new Entity(t,x,y));
     }
 
     
     const spawn = (type, n) => {
       for (let i=0;i<n;i++) {
-        let x,y,tries=0;
-        do { x=Math.floor(Math.random()*COLS); y=Math.floor(Math.random()*ROWS); tries++; }
-        while (waterSet.has(`${x},${y}`) && tries<10);
+        const [x,y] = this.randomLandCell(false);
         const e = new Entity(type,x,y);
         this.entities.push(e);
         this.totalBorn++;
@@ -628,21 +1076,46 @@ class World {
 
   clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v))}
 
+  moveEntity(e, nx, ny) {
+    nx = this.clamp(Math.round(nx),0,COLS-1);
+    ny = this.clamp(Math.round(ny),0,ROWS-1);
+    if (this.isWater(nx,ny)) return false;
+    e.x = nx;
+    e.y = ny;
+    return true;
+  }
+
+  stepAway(e, tx, ty) {
+    const step = Math.max(1, Math.ceil(e.speed * this.biomeDef(e.x,e.y).speed));
+    const nx = e.x - Math.sign(tx-e.x)*step;
+    const ny = e.y - Math.sign(ty-e.y)*step;
+    if (!this.moveEntity(e,nx,ny)) this.wanderRandom(e);
+  }
+
   moveToward(e, tx, ty) {
-    const steps = Math.ceil(e.speed);
+    const steps = Math.max(1, Math.ceil(e.speed * this.biomeDef(e.x,e.y).speed));
     let dx=tx-e.x, dy=ty-e.y;
     if (Math.abs(dx)+Math.abs(dy)===0) return;
+    let nx=e.x, ny=e.y;
     if (Math.abs(dx)>=Math.abs(dy)) {
-      e.x=this.clamp(e.x+Math.sign(dx)*Math.min(steps,Math.abs(dx)),0,COLS-1);
+      nx=this.clamp(e.x+Math.sign(dx)*Math.min(steps,Math.abs(dx)),0,COLS-1);
     } else {
-      e.y=this.clamp(e.y+Math.sign(dy)*Math.min(steps,Math.abs(dy)),0,ROWS-1);
+      ny=this.clamp(e.y+Math.sign(dy)*Math.min(steps,Math.abs(dy)),0,ROWS-1);
+    }
+    if (!this.moveEntity(e,nx,ny) && Math.abs(dx) !== Math.abs(dy)) {
+      nx = this.clamp(e.x+Math.sign(dx),0,COLS-1);
+      ny = this.clamp(e.y+Math.sign(dy),0,ROWS-1);
+      this.moveEntity(e,nx,ny);
     }
   }
 
   wanderRandom(e) {
-    const s = Math.ceil(e.speed);
-    e.x = this.clamp(e.x + Math.floor(Math.random()*s*2+1)-s, 0, COLS-1);
-    e.y = this.clamp(e.y + Math.floor(Math.random()*s*2+1)-s, 0, ROWS-1);
+    const s = Math.max(1, Math.ceil(e.speed * this.biomeDef(e.x,e.y).speed));
+    for (let i=0; i<5; i++) {
+      const nx = e.x + Math.floor(Math.random()*(s*2+1))-s;
+      const ny = e.y + Math.floor(Math.random()*(s*2+1))-s;
+      if (this.moveEntity(e,nx,ny)) return;
+    }
   }
 
   tick() {
@@ -656,7 +1129,7 @@ class World {
     if (this.seasonTimer >= this.SEASON_LEN) {
       this.seasonTimer = 0;
       this.seasonIdx = (this.seasonIdx+1)%4;
-      events.push(`climate:🌤 Estação: ${SEASONS[this.seasonIdx]}`);
+      events.push(`climate:${this.season().icon} Estação: ${this.season().name}`);
     }
 
     if (this.tempOverride !== null) {
@@ -664,20 +1137,28 @@ class World {
       this.tempOverrideTimer--;
       if (this.tempOverrideTimer <= 0) { this.tempOverride = null; }
     } else {
-      const target = this.baseTemp + SEASON_TEMP_MOD[this.seasonIdx] + (Math.random()-0.5)*4;
+      const target = this.baseTemp + this.season().temp + (Math.random()-0.5)*4;
       this.currentTemp += (target - this.currentTemp) * 0.02;
     }
+
+    this.updateWeather(events);
 
     
     if (!this.droughtActive) {
       for (const w of this.waterSources) {
-        w.volume = Math.min(w.maxVolume, w.volume + w.refillRate);
+        w.volume = Math.min(w.maxVolume, w.volume + w.refillRate * this.season().rain);
       }
     } else {
       for (const w of this.waterSources) {
-        w.volume = Math.max(0, w.volume - 0.1);
+        w.volume = Math.max(0, w.volume - 0.16);
       }
     }
+
+    this.updateFire(events);
+    if (this.bloomTimer > 0) this.bloomTimer--;
+    if (this.season().name === 'Primavera' && !this.weather && Math.random() < 0.0012) events.push(this.triggerBloom(false));
+    if ((this.currentTemp > 37 || this.droughtActive) && !this.weather && this.fireCells.length < 12 && Math.random() < 0.0016) events.push(this.igniteWildfire(false));
+    if (this.waterSources.length < 900 && this.droughtActive && Math.random() < 0.0006) events.push(this.addOasis(false));
 
     
     const plantList = this.plants;
@@ -686,11 +1167,14 @@ class World {
       let px,py,tries=0;
       const tempOk = this.currentTemp > -5 && this.currentTemp < 45;
       if (tempOk) {
-        do { px=Math.floor(Math.random()*COLS); py=Math.floor(Math.random()*ROWS); tries++; }
-        while (waterSet.has(`${px},${py}`) && tries<8);
+        do { [px,py]=this.randomLandCell(true); tries++; }
+        while (this.biomeAt(px,py) === BIOME.WATER && tries<8);
         if (tries < 8) {
-          const r = Math.random();
-          this.entities.push(new Entity(r<0.6?T.GRASS:r<0.85?T.BUSH:T.TREE, px, py));
+          const b = this.biomeAt(px,py);
+          if (Math.random() <= BIOME_DEFS[b].plant) {
+            const r = Math.random();
+            this.entities.push(new Entity(r<0.58?T.GRASS:r<0.84?T.BUSH:T.TREE, px, py));
+          }
         }
       }
     }
@@ -699,13 +1183,16 @@ class World {
     for (const p of plantList) {
       p.age++;
       const tempStress = Math.max(0, Math.abs(this.currentTemp - 20) - 15) * 0.05;
-      p.energy = Math.min(p.maxEnergy, p.energy + p.growRate - tempStress);
+      const biomeGrow = BIOME_DEFS[this.biomeAt(p.x,p.y)].plant;
+      const droughtStress = this.droughtActive ? 0.45 : 0;
+      const bloomBoost = this.bloomTimer > 0 ? 0.42 : 0;
+      p.energy = Math.min(p.maxEnergy, p.energy + p.growRate*biomeGrow*this.season().rain + bloomBoost - tempStress - droughtStress);
       if (p.energy <= 0 || p.age > 1000) { p.dead = true; continue; }
       
       if (Math.random() < p.seedRate && !waterSet.has(`${p.x},${p.y}`)) {
         const nx = this.clamp(p.x + Math.floor(Math.random()*7)-3, 0, COLS-1);
         const ny = this.clamp(p.y + Math.floor(Math.random()*7)-3, 0, ROWS-1);
-        if (!waterSet.has(`${nx},${ny}`) && plantList.length < 600) {
+        if (!this.isWater(nx,ny) && plantList.length < 600 && Math.random() < BIOME_DEFS[this.biomeAt(nx,ny)].plant) {
           newborns.push(new Entity(p.type, nx, ny, {energy: p.energy*0.3}));
         }
       }
@@ -727,12 +1214,15 @@ class World {
                     + (tooCold ? (e.coldTolerance - this.currentTemp)*0.2 : 0);
 
       
-      e.hydration -= (0.5 + e.speed*0.1);
+      const biome = this.biomeAt(e.x,e.y);
+      const biomeDef = BIOME_DEFS[biome];
+      const desertThirst = biome === BIOME.DESERT ? 0.42 : biome === BIOME.WETLAND ? -0.18 : 0;
+      e.hydration -= (0.5 + e.speed*0.1 + desertThirst);
       if (e.hydration < 0) e.energy += e.hydration*0.5; 
 
       
       const baseDrain = e.type===T.INSECT?0.6:e.type===T.HERB?0.8:e.type===T.PRED?1.0:0.9;
-      e.energy -= (baseDrain + e.speed/4 + tempDmg);
+      e.energy -= (baseDrain + e.speed/4 + tempDmg + biomeDef.drain);
 
       
       if (e.energy <= 0 || e.age > e.maxAge || e.hydration < -50) {
@@ -762,8 +1252,7 @@ class World {
         const threat = this.nearestOf(e.x,e.y,[T.PRED,T.HUMAN],e.perception*2);
         if (threat) {
           
-          e.x = this.clamp(e.x - Math.sign(threat.x-e.x)*Math.ceil(e.speed), 0, COLS-1);
-          e.y = this.clamp(e.y - Math.sign(threat.y-e.y)*Math.ceil(e.speed), 0, ROWS-1);
+          this.stepAway(e, threat.x, threat.y);
         } else {
           const plant = this.nearestOf(e.x,e.y,[T.GRASS,T.BUSH,T.TREE],e.perception*2);
           if (plant) {
@@ -782,8 +1271,7 @@ class World {
         
         const threat = this.nearestOf(e.x,e.y,[T.PRED],e.perception*2);
         if (threat) {
-          e.x = this.clamp(e.x - Math.sign(threat.x-e.x)*Math.ceil(e.speed), 0, COLS-1);
-          e.y = this.clamp(e.y - Math.sign(threat.y-e.y)*Math.ceil(e.speed), 0, ROWS-1);
+          this.stepAway(e, threat.x, threat.y);
         } else {
           const plant = this.nearestOf(e.x,e.y,[T.GRASS,T.BUSH,T.TREE],e.perception*2);
           if (plant) {
@@ -815,8 +1303,7 @@ class World {
         
         const threat = this.nearestOf(e.x,e.y,[T.PRED],e.perception*2);
         if (threat) {
-          e.x = this.clamp(e.x - Math.sign(threat.x-e.x)*Math.ceil(e.speed), 0, COLS-1);
-          e.y = this.clamp(e.y - Math.sign(threat.y-e.y)*Math.ceil(e.speed), 0, ROWS-1);
+          this.stepAway(e, threat.x, threat.y);
         } else if (e.energy < 55) {
           const prey = this.nearestOf(e.x,e.y,[T.HERB],e.perception*2);
           if (prey) {
@@ -844,8 +1331,7 @@ class World {
         
         const threat = this.nearestOf(e.x,e.y,[T.PRED],e.perception*intel*0.5);
         if (threat && Math.abs(e.x-threat.x)+Math.abs(e.y-threat.y) < e.perception*2) {
-          e.x = this.clamp(e.x - Math.sign(threat.x-e.x)*Math.ceil(e.speed), 0, COLS-1);
-          e.y = this.clamp(e.y - Math.sign(threat.y-e.y)*Math.ceil(e.speed), 0, ROWS-1);
+          this.stepAway(e, threat.x, threat.y);
         } else if (e.energy < 50) {
           
           const prey = intel > 7
@@ -872,7 +1358,7 @@ class World {
       if (e.energy > reproThreshold && e.hydration > 30 && Math.random() < reproChance) {
         const nx = this.clamp(e.x + Math.floor(Math.random()*5)-2, 0, COLS-1);
         const ny = this.clamp(e.y + Math.floor(Math.random()*5)-2, 0, ROWS-1);
-        if (!waterSet.has(`${nx},${ny}`)) {
+        if (!this.isWater(nx,ny)) {
           const { child, emerged } = e.spawnOffspring(nx, ny);
           e.energy -= 28;
           newborns.push(child);
@@ -899,6 +1385,8 @@ class World {
     
     this.entities = this.entities.filter(e=>!e.dead);
     this.entities.push(...newborns);
+    for (const fx of this.fxBursts) { fx.age++; fx.ttl--; }
+    this.fxBursts = this.fxBursts.filter(fx=>fx.ttl > 0).slice(-70);
 
     return events;
   }
@@ -912,6 +1400,11 @@ class World {
     const plants  = this.plants.length;
     const totalWater = this.waterSources.reduce((s,w)=>s+w.volume,0);
     const maxWater   = this.waterSources.reduce((s,w)=>s+w.maxVolume,0);
+    const waterLevel = maxWater>0 ? Math.round((totalWater/maxWater)*100) : 0;
+    const biomass = Math.round(this.plants.reduce((s,p)=>s+(p.energy||0),0));
+    const biomeCounts = this.biomeCounts();
+    const dominantBiome = this.dominantBiome();
+    const light = this.lightInfo();
 
     
     const activeSpecies = new Set(this.fauna.map(e=>e.speciesKey)).size;
@@ -923,8 +1416,21 @@ class World {
       totalPop: herbs+preds+omnis+insects+humans,
       born:this.totalBorn, dead:this.totalDead, mutations:this.totalMutations,
       temp: Math.round(this.currentTemp*10)/10,
-      season: SEASONS[this.seasonIdx],
-      waterLevel: maxWater>0 ? Math.round((totalWater/maxWater)*100) : 0,
+      season: this.season().name,
+      seasonIcon: this.season().icon,
+      weather: this.weather ? {...this.weather} : null,
+      weatherLabel: this.weatherLabel(),
+      biomeMap: this.biomeMap,
+      droughtActive: this.droughtActive,
+      waterLevel,
+      biomass,
+      health: this.ecosystemHealth(plants, herbs+preds+omnis+insects+humans, waterLevel),
+      dominantBiome,
+      biomeCounts,
+      light,
+      lightPhase: this.lightPhase(),
+      fireCells: this.fireCells,
+      fxBursts: this.fxBursts,
       running:this.running,
       activeSpecies,
       entities: this.entities,
@@ -939,133 +1445,514 @@ canvas.width  = COLS * CELL;
 canvas.height = ROWS * CELL;
 
 let showHeatmap = false;
-let showBiomes = false;
-
-
-let cachedBiomeMap = null;
-
+let showBiomes = true;
+let showTrails = true;
 let frontendHeatmap = null;
+let frontendTrails = [];
+let terrainCanvas = null;
+let terrainSource = null;
 
-const BIOME_COLORS = {F:'rgba(0,120,60,0.22)',D:'rgba(200,160,40,0.28)',W:'rgba(0,140,220,0.35)',P:'rgba(60,100,50,0.06)'};
+function hexToRgb(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return {r:(n>>16)&255, g:(n>>8)&255, b:n&255};
+}
 
-function render(d) {
-  ctx.fillStyle = COL.bg;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+function shade(hex, amt) {
+  const c = hexToRgb(hex);
+  const mix = amt >= 0 ? 255 : 0;
+  const a = Math.abs(amt) / 100;
+  const r = Math.round(c.r + (mix - c.r)*a);
+  const g = Math.round(c.g + (mix - c.g)*a);
+  const b = Math.round(c.b + (mix - c.b)*a);
+  return `rgb(${r},${g},${b})`;
+}
 
-  
-  if (showBiomes && cachedBiomeMap) {
-    for (let y=0;y<ROWS;y++) {
-      const row = cachedBiomeMap[y]||'';
-      for (let x=0;x<COLS;x++) {
-        const b = row[x]||'P';
-        ctx.fillStyle = BIOME_COLORS[b]||'transparent';
-        ctx.fillRect(x*CELL, y*CELL, CELL, CELL);
+function terrainNoise(x,y) {
+  return Math.sin(x*12.9898 + y*78.233) * 43758.5453 % 1;
+}
+
+function buildTerrain(map) {
+  terrainCanvas = document.createElement('canvas');
+  terrainCanvas.width = canvas.width;
+  terrainCanvas.height = canvas.height;
+  const tc = terrainCanvas.getContext('2d');
+  tc.fillStyle = COL.bg;
+  tc.fillRect(0,0,terrainCanvas.width,terrainCanvas.height);
+
+  for (let y=0; y<ROWS; y++) {
+    const row = map[y] || [];
+    for (let x=0; x<COLS; x++) {
+      const b = row[x] || BIOME.PLAINS;
+      const def = BIOME_DEFS[b] || BIOME_DEFS[BIOME.PLAINS];
+      const n = Math.sin((x+3)*0.71 + (y+7)*1.37) * 0.5 + Math.cos((x-y)*0.23) * 0.5;
+      tc.fillStyle = shade(def.base, n*10);
+      tc.fillRect(x*CELL, y*CELL, CELL, CELL);
+
+      if (b === BIOME.FOREST && (x+y)%5===0) {
+        tc.fillStyle = 'rgba(129,216,121,0.22)';
+        tc.beginPath(); tc.arc(x*CELL+CELL*0.55,y*CELL+CELL*0.45,1.25,0,Math.PI*2); tc.fill();
+      } else if (b === BIOME.DESERT && (x*3+y)%7===0) {
+        tc.fillStyle = 'rgba(255,227,145,0.16)';
+        tc.fillRect(x*CELL+2,y*CELL+4,3,1);
+      } else if (b === BIOME.WETLAND && (x+y*2)%6===0) {
+        tc.strokeStyle = 'rgba(121,232,194,0.22)';
+        tc.beginPath(); tc.moveTo(x*CELL+1,y*CELL+5); tc.lineTo(x*CELL+6,y*CELL+3); tc.stroke();
+      } else if (b === BIOME.HIGHLAND && (x+y)%4===0) {
+        tc.fillStyle = 'rgba(255,255,255,0.12)';
+        tc.beginPath(); tc.moveTo(x*CELL+2,y*CELL+6); tc.lineTo(x*CELL+4,y*CELL+2); tc.lineTo(x*CELL+6,y*CELL+6); tc.fill();
+      } else if (b === BIOME.WATER) {
+        tc.fillStyle = 'rgba(133,227,255,0.18)';
+        tc.fillRect(x*CELL+1,y*CELL+Math.floor((x+y)%3)+3, CELL-2, 1);
       }
     }
   }
 
-  
+  const g = tc.createLinearGradient(0,0,0,terrainCanvas.height);
+  g.addColorStop(0,'rgba(255,255,255,0.04)');
+  g.addColorStop(0.5,'rgba(0,0,0,0)');
+  g.addColorStop(1,'rgba(0,0,0,0.17)');
+  tc.fillStyle = g;
+  tc.fillRect(0,0,terrainCanvas.width,terrainCanvas.height);
+  terrainSource = map;
+}
+
+function ensureTerrain(map) {
+  if (!terrainCanvas || terrainSource !== map) buildTerrain(map || []);
+}
+
+function drawBiomeDetail(map) {
+  ctx.save();
+  ctx.strokeStyle = 'rgba(230,255,231,0.045)';
+  ctx.lineWidth = 0.6;
+  for (let x=0; x<=COLS; x+=8) {
+    ctx.beginPath(); ctx.moveTo(x*CELL,0); ctx.lineTo(x*CELL,canvas.height); ctx.stroke();
+  }
+  for (let y=0; y<=ROWS; y+=8) {
+    ctx.beginPath(); ctx.moveTo(0,y*CELL); ctx.lineTo(canvas.width,y*CELL); ctx.stroke();
+  }
+  ctx.globalAlpha = 0.42;
+  ctx.font = 'bold 9px Segoe UI, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  const placed = new Set();
+  for (let y=5; y<ROWS; y+=18) for (let x=7; x<COLS; x+=28) {
+    const b = map[y]?.[x] || BIOME.PLAINS;
+    const label = BIOME_DEFS[b]?.name || '';
+    if (!label || b === BIOME.WATER) continue;
+    const key = `${b}-${Math.floor(x/40)}-${Math.floor(y/22)}`;
+    if (placed.has(key)) continue;
+    placed.add(key);
+    ctx.fillStyle = 'rgba(237,250,235,0.58)';
+    ctx.fillText(label, x*CELL, y*CELL);
+  }
+  ctx.restore();
+}
+
+function drawWaterSources(sources, cycle) {
+  ctx.save();
+  for (const w of sources) {
+    if (w.volume <= 0) continue;
+    if ((w.x*3 + w.y + cycle) % 9 !== 0) continue;
+    const px = w.x*CELL+CELL/2, py = w.y*CELL+CELL/2;
+    const ratio = Math.max(0, Math.min(1, w.volume/w.maxVolume));
+    ctx.fillStyle = `rgba(105,225,250,${0.08+ratio*0.13})`;
+    ctx.beginPath(); ctx.ellipse(px,py,CELL*0.55,CELL*0.42,Math.sin((cycle+w.x)*0.08)*0.4,0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle = `rgba(198,249,255,${0.13+ratio*0.18})`;
+    ctx.lineWidth = 0.8;
+    ctx.beginPath(); ctx.arc(px,py,CELL*(0.34+0.12*Math.sin(cycle*0.08+w.y)),0,Math.PI*2); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawPlant(e, px, py, cycle) {
+  const vigor = Math.max(0.2, Math.min(1, e.energy/e.maxEnergy));
+  ctx.save();
+  ctx.translate(px, py);
+  ctx.globalAlpha = 0.75 + vigor*0.25;
+  if (e.type === T.GRASS) {
+    ctx.strokeStyle = '#7bea75';
+    ctx.lineWidth = 1.2;
+    for (let i=-1; i<=1; i++) {
+      ctx.beginPath();
+      ctx.moveTo(0, CELL*0.32);
+      ctx.quadraticCurveTo(i*CELL*0.18, -CELL*0.05, i*CELL*0.28, -CELL*0.45*vigor);
+      ctx.stroke();
+    }
+  } else if (e.type === T.BUSH) {
+    const colors = ['#58ce6f','#3fae5a','#81df8a'];
+    for (let i=0; i<5; i++) {
+      ctx.fillStyle = colors[i%colors.length];
+      const a = i*Math.PI*0.42 + cycle*0.002;
+      ctx.beginPath();
+      ctx.arc(Math.cos(a)*CELL*0.18, Math.sin(a)*CELL*0.12, CELL*(0.22+vigor*0.12),0,Math.PI*2);
+      ctx.fill();
+    }
+  } else {
+    ctx.fillStyle = '#6f4a25';
+    ctx.fillRect(-CELL*0.08, -CELL*0.05, CELL*0.16, CELL*0.45);
+    ctx.fillStyle = '#2fa657';
+    ctx.beginPath(); ctx.arc(-CELL*0.18,-CELL*0.22,CELL*0.34*vigor,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#4ed06e';
+    ctx.beginPath(); ctx.arc(CELL*0.15,-CELL*0.26,CELL*0.38*vigor,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#236f3e';
+    ctx.beginPath(); ctx.arc(0,-CELL*0.42,CELL*0.36*vigor,0,Math.PI*2); ctx.fill();
+  }
+  ctx.restore();
+}
+
+function creatureColor(e) {
+  const visual = speciesRegistry[e.speciesKey]?.visual;
+  const hueShift = visual?.hueShift || 0;
+  const map = {
+    [T.HERB]: [146,84,48],
+    [T.PRED]: [348,92,62],
+    [T.OMNI]: [29,100,61],
+    [T.INSECT]: [48,93,57],
+    [T.HUMAN]: [270,88,72]
+  };
+  const [h,s,l] = map[e.type] || [0,0,80];
+  return `hsl(${h+hueShift} ${s}% ${l}%)`;
+}
+
+function drawVariantMark(e, size, color) {
+  const visual = speciesRegistry[e.speciesKey]?.visual;
+  if (!visual) return;
+  ctx.strokeStyle = 'rgba(255,255,255,0.42)';
+  ctx.fillStyle = 'rgba(255,255,255,0.45)';
+  ctx.lineWidth = 0.7;
+  if (visual.pattern === 'listrado') {
+    for (let i=-1; i<=1; i++) {
+      ctx.beginPath(); ctx.moveTo(-size*0.3, i*size*0.14); ctx.lineTo(size*0.32, i*size*0.08); ctx.stroke();
+    }
+  } else if (visual.pattern === 'anelado') {
+    ctx.beginPath(); ctx.ellipse(0,0,size*0.38,size*0.22,0,0,Math.PI*2); ctx.stroke();
+  } else if (visual.pattern === 'pintado') {
+    ctx.beginPath(); ctx.arc(-size*0.18,-size*0.05,1.05,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(size*0.16,size*0.10,0.95,0,Math.PI*2); ctx.fill();
+  }
+}
+
+function drawCreature(e, px, py, cycle) {
+  const visual = speciesRegistry[e.speciesKey]?.visual;
+  const scale = visual?.scale || 1;
+  const size = CELL * 0.72 * scale;
+  const col = creatureColor(e);
+  const bob = Math.sin((cycle + e.age*3 + e.x)*0.12) * 0.55;
+  const angle = Math.sin((e.x*11 + e.y*5 + cycle)*0.018) * 0.55;
+  const eRat = Math.max(0, Math.min(1, (e.energy||50)/100));
+  const hRat = Math.max(0, Math.min(1, (e.hydration||50)/100));
+
+  ctx.save();
+  ctx.translate(px, py+bob);
+  ctx.rotate(angle);
+  ctx.shadowColor = col;
+  ctx.shadowBlur = e.type === T.HUMAN ? 9 : 4;
+  ctx.fillStyle = col;
+  ctx.strokeStyle = 'rgba(2,8,6,0.72)';
+  ctx.lineWidth = 0.8;
+
+  if (e.type === T.INSECT) {
+    ctx.globalAlpha = 0.72;
+    ctx.fillStyle = 'rgba(255,242,133,0.72)';
+    ctx.beginPath(); ctx.ellipse(-size*0.22,-size*0.05,size*0.24,size*0.42,0.45,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(size*0.22,-size*0.05,size*0.24,size*0.42,-0.45,0,Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = col;
+    ctx.beginPath(); ctx.ellipse(0,0,size*0.20,size*0.46,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  } else if (e.type === T.PRED) {
+    ctx.beginPath();
+    ctx.moveTo(size*0.54, 0);
+    ctx.quadraticCurveTo(-size*0.10, -size*0.50, -size*0.52, -size*0.16);
+    ctx.quadraticCurveTo(-size*0.20, 0, -size*0.52, size*0.18);
+    ctx.quadraticCurveTo(-size*0.06, size*0.46, size*0.54, 0);
+    ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#ffe5e8';
+    ctx.beginPath(); ctx.arc(size*0.28,-size*0.08,1.2,0,Math.PI*2); ctx.fill();
+  } else if (e.type === T.HERB) {
+    ctx.beginPath(); ctx.ellipse(0,0,size*0.48,size*0.34,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.arc(size*0.42,-size*0.03,size*0.20,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = col;
+    ctx.beginPath(); ctx.moveTo(size*0.48,-size*0.2); ctx.lineTo(size*0.58,-size*0.44); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(size*0.34,-size*0.2); ctx.lineTo(size*0.26,-size*0.42); ctx.stroke();
+  } else if (e.type === T.OMNI) {
+    ctx.beginPath();
+    for (let i=0;i<6;i++) {
+      const a = Math.PI/6 + i*Math.PI/3;
+      const x = Math.cos(a)*size*0.48, y = Math.sin(a)*size*0.40;
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    }
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    ctx.beginPath(); ctx.arc(size*0.18,-size*0.08,1.15,0,Math.PI*2); ctx.fill();
+  } else if (e.type === T.HUMAN) {
+    ctx.beginPath(); ctx.arc(0,-size*0.35,size*0.20,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(0,size*0.06,size*0.28,size*0.46,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = col;
+    ctx.lineWidth = 1.1;
+    ctx.beginPath(); ctx.moveTo(-size*0.38,size*0.02); ctx.lineTo(size*0.38,-size*0.12); ctx.stroke();
+  }
+
+  ctx.shadowBlur = 0;
+  drawVariantMark(e, size, col);
+  ctx.restore();
+
+  ctx.save();
+  ctx.strokeStyle = `rgba(255,255,255,${0.08 + eRat*0.18})`;
+  ctx.lineWidth = 0.7;
+  ctx.beginPath(); ctx.arc(px,py,CELL*0.62,0,Math.PI*2*eRat); ctx.stroke();
+  if (hRat < 0.48) {
+    ctx.strokeStyle = 'rgba(91,219,255,0.55)';
+    ctx.beginPath(); ctx.arc(px,py,CELL*0.78,-Math.PI/2,-Math.PI/2+Math.PI*2*hRat); ctx.stroke();
+  }
+  if (e.justMutated) {
+    ctx.strokeStyle='#ff66ff'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.arc(px,py,CELL*1.05,0,Math.PI*2); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawWeather(weather, cycle) {
+  if (!weather) return;
+  ctx.save();
+  if (weather.type === 'RAIN') {
+    ctx.strokeStyle = 'rgba(139,230,255,0.22)';
+    ctx.lineWidth = 1;
+    for (let i=0; i<120; i++) {
+      const x = (i*73 + cycle*3) % canvas.width;
+      const y = (i*37 + cycle*7) % canvas.height;
+      ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x-5,y+12); ctx.stroke();
+    }
+  } else if (weather.type === 'HEAT') {
+    ctx.fillStyle = 'rgba(255,112,44,0.12)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+  } else if (weather.type === 'COLD') {
+    ctx.fillStyle = 'rgba(130,221,255,0.12)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+  } else if (weather.type === 'HURRICANE') {
+    const cx = weather.x*CELL, cy = weather.y*CELL, radius = weather.radius*CELL;
+    ctx.translate(cx,cy);
+    ctx.rotate(weather.spin);
+    const halo = ctx.createRadialGradient(0,0,radius*0.1,0,0,radius*1.2);
+    halo.addColorStop(0,'rgba(255,255,255,0.04)');
+    halo.addColorStop(0.38,'rgba(170,240,255,0.20)');
+    halo.addColorStop(1,'rgba(70,150,190,0)');
+    ctx.fillStyle = halo;
+    ctx.beginPath(); ctx.arc(0,0,radius*1.25,0,Math.PI*2); ctx.fill();
+
+    for (let arm=0; arm<5; arm++) {
+      ctx.strokeStyle = arm%2 ? 'rgba(255,255,255,0.58)' : 'rgba(128,230,255,0.48)';
+      ctx.lineWidth = arm%2 ? 2.2 : 3.4;
+      ctx.beginPath();
+      for (let i=0; i<34; i++) {
+        const t = i/33;
+        const a = arm*Math.PI*0.42 + t*Math.PI*2.0;
+        const r = radius*(0.12 + t*0.92);
+        const x = Math.cos(a)*r, y = Math.sin(a)*r;
+        i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+    ctx.fillStyle = 'rgba(5,25,30,0.82)';
+    ctx.beginPath(); ctx.arc(0,0,Math.max(8,radius*0.16),0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle = 'rgba(238,255,255,0.82)';
+    ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.arc(0,0,Math.max(10,radius*0.20),0,Math.PI*2); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawSeasonTint(d) {
+  const season = SEASONS.find(s=>s.name===d.season) || SEASONS[0];
+  ctx.fillStyle = season.tint;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  if (d.droughtActive) {
+    ctx.fillStyle = 'rgba(198,142,64,0.11)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+  }
+}
+
+function drawTrails(trails) {
+  if (!showTrails || !trails.length) return;
+  ctx.save();
+  for (const t of trails) {
+    const col = COL[t.type] || '#fff';
+    const alpha = Math.max(0, Math.min(0.28, t.ttl / 160));
+    ctx.fillStyle = col.replace(')', ` / ${alpha})`).startsWith('hsl') ? col : col;
+    ctx.globalAlpha = alpha;
+    ctx.beginPath();
+    ctx.arc(t.x*CELL+CELL/2, t.y*CELL+CELL/2, Math.max(1, CELL*0.22*(t.ttl/44)), 0, Math.PI*2);
+    ctx.fillStyle = col;
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawFire(cells, cycle) {
+  if (!cells || !cells.length) return;
+  ctx.save();
+  for (const f of cells) {
+    const px = f.x*CELL + CELL/2, py = f.y*CELL + CELL/2;
+    const flicker = 0.75 + Math.sin(cycle*0.4 + f.x*2.1 + f.y)*0.25;
+    const r = CELL * (0.45 + f.intensity*0.33) * flicker;
+    const g = ctx.createRadialGradient(px,py,0,px,py,r*2.4);
+    g.addColorStop(0,'rgba(255,243,123,0.78)');
+    g.addColorStop(0.28,'rgba(255,115,32,0.64)');
+    g.addColorStop(1,'rgba(80,16,5,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(px,py,r*2.4,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = 'rgba(255,205,63,0.9)';
+    ctx.beginPath();
+    ctx.moveTo(px, py-r*1.15);
+    ctx.quadraticCurveTo(px+r*0.75, py-r*0.18, px+r*0.2, py+r*0.72);
+    ctx.quadraticCurveTo(px-r*0.8, py+r*0.22, px, py-r*1.15);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawFxBursts(fxList, cycle) {
+  if (!fxList || !fxList.length) return;
+  ctx.save();
+  for (const fx of fxList) {
+    const age = fx.age || 0;
+    const life = Math.max(0.01, fx.ttl / 120);
+    const px = fx.x*CELL + CELL/2, py = fx.y*CELL + CELL/2;
+    const radius = (fx.radius || 5) * CELL * (1 + age/90);
+    if (fx.type === 'BLOOM') {
+      for (let i=0;i<12;i++) {
+        const a = i*Math.PI/6 + cycle*0.018;
+        ctx.fillStyle = `rgba(244,154,214,${0.18 + life*0.34})`;
+        ctx.beginPath(); ctx.ellipse(px+Math.cos(a)*radius*0.55, py+Math.sin(a)*radius*0.38, 2.5, 1.3, a, 0, Math.PI*2); ctx.fill();
+      }
+      ctx.strokeStyle = `rgba(139,255,159,${0.18 + life*0.28})`;
+    } else if (fx.type === 'OASIS') {
+      ctx.strokeStyle = `rgba(109,232,255,${0.18 + life*0.38})`;
+    } else {
+      ctx.strokeStyle = `rgba(255,112,32,${0.18 + life*0.42})`;
+    }
+    ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.arc(px,py,radius,0,Math.PI*2); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawCloudLayer(d) {
+  ctx.save();
+  const weatherAlpha = d.weather?.type === 'RAIN' ? 0.22 : d.weather?.type === 'HURRICANE' ? 0.16 : 0.08;
+  ctx.globalAlpha = weatherAlpha;
+  ctx.fillStyle = '#d8fff4';
+  const cycle = d.cycle || 0;
+  for (let i=0;i<12;i++) {
+    const x = ((i*137 + cycle*0.45) % (canvas.width + 180)) - 90;
+    const y = 35 + (i%5)*92 + Math.sin(cycle*0.008+i)*18;
+    ctx.beginPath();
+    ctx.ellipse(x,y,68,18,0,0,Math.PI*2);
+    ctx.ellipse(x+42,y+8,58,15,0,0,Math.PI*2);
+    ctx.ellipse(x-48,y+9,46,13,0,0,Math.PI*2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawLightOverlay(d) {
+  const p = d.lightPhase ?? 0;
+  const isNight = p < 0.18 || p > 0.82;
+  const isDawn = p >= 0.18 && p < 0.32;
+  const isDusk = p >= 0.68 && p < 0.82;
+  ctx.save();
+  const orbX = canvas.width * p;
+  const orbY = 44 + Math.sin(p*Math.PI) * 68;
+  const orbColor = isNight ? 'rgba(199,214,255,0.72)' : 'rgba(255,226,111,0.82)';
+  ctx.fillStyle = orbColor;
+  ctx.shadowColor = orbColor;
+  ctx.shadowBlur = isNight ? 18 : 28;
+  ctx.beginPath(); ctx.arc(orbX, orbY, isNight ? 8 : 11, 0, Math.PI*2); ctx.fill();
+  ctx.shadowBlur = 0;
+
+  if (isNight) {
+    ctx.fillStyle = 'rgba(5,8,22,0.33)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = 'rgba(215,226,255,0.42)';
+    for (let i=0; i<80; i++) {
+      const x = (i*91 + 37) % canvas.width;
+      const y = (i*47 + 19) % Math.floor(canvas.height*0.62);
+      if ((i + Math.floor((d.cycle||0)/12)) % 5 === 0) ctx.fillRect(x,y,1,1);
+    }
+  } else if (isDawn || isDusk) {
+    const g = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+    g.addColorStop(0,'rgba(255,154,92,0.16)');
+    g.addColorStop(0.45,'rgba(255,226,120,0.06)');
+    g.addColorStop(1,'rgba(23,54,95,0.14)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+  } else {
+    ctx.fillStyle = 'rgba(255,244,177,0.035)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+  }
+  ctx.restore();
+}
+
+function drawVignette() {
+  ctx.save();
+  const g = ctx.createRadialGradient(canvas.width/2, canvas.height/2, canvas.height*0.28, canvas.width/2, canvas.height/2, canvas.width*0.72);
+  g.addColorStop(0,'rgba(0,0,0,0)');
+  g.addColorStop(1,'rgba(0,0,0,0.32)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.restore();
+}
+
+function render(d) {
+  const map = d.biomeMap || (world ? world.biomeMap : []);
+  ensureTerrain(map);
+  ctx.drawImage(terrainCanvas, 0, 0);
+  drawSeasonTint(d);
+  drawCloudLayer(d);
+
   if (showHeatmap && frontendHeatmap) {
     for (let x=0;x<COLS;x++) for (let y=0;y<ROWS;y++) {
       const h = frontendHeatmap[x]?.[y]||0;
       if (h > 0) {
-        const alpha = Math.min(0.6, h/80);
-        ctx.fillStyle = `rgba(255,100,0,${alpha})`;
+        const alpha = Math.min(0.54, h/85);
+        ctx.fillStyle = `rgba(255,103,39,${alpha})`;
         ctx.fillRect(x*CELL, y*CELL, CELL, CELL);
       }
     }
   }
 
-  
-  ctx.strokeStyle = COL.grid; ctx.lineWidth = 0.4;
-  for (let x=0;x<=COLS;x++){ctx.beginPath();ctx.moveTo(x*CELL,0);ctx.lineTo(x*CELL,canvas.height);ctx.stroke();}
-  for (let y=0;y<=ROWS;y++){ctx.beginPath();ctx.moveTo(0,y*CELL);ctx.lineTo(canvas.width,y*CELL);ctx.stroke();}
+  drawTrails(frontendTrails);
+  drawWaterSources(d.waterSources, d.cycle || 0);
+  if (showBiomes) drawBiomeDetail(map);
 
-  
-  for (const w of d.waterSources) {
-    if (w.volume <= 0) continue;
-    const alpha = 0.15 + (w.volume/w.maxVolume)*0.5;
-    ctx.fillStyle = `rgba(0,200,240,${alpha})`;
-    ctx.fillRect(w.x*CELL, w.y*CELL, CELL, CELL);
-  }
-
-  
   for (const e of d.entities) {
     const px = e.x*CELL+CELL/2, py = e.y*CELL+CELL/2;
-
-    if (e.type===T.GRASS) {
-      const g = Math.min(1, e.energy/e.maxEnergy);
-      ctx.fillStyle = `rgba(46,204,64,${0.15+g*0.5})`;
-      ctx.beginPath(); ctx.arc(px,py,CELL*0.55,0,Math.PI*2); ctx.fill();
-      ctx.fillStyle = COL[T.GRASS]; ctx.font=`${CELL*0.75}px monospace`;
-      ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('ʼ',px,py);
-      continue;
-    }
-    if (e.type===T.BUSH) {
-      ctx.fillStyle='rgba(39,174,96,0.25)';
-      ctx.beginPath(); ctx.arc(px,py,CELL*0.7,0,Math.PI*2); ctx.fill();
-      ctx.fillStyle=COL[T.BUSH]; ctx.font=`${CELL*0.85}px monospace`;
-      ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('⁂',px,py);
-      continue;
-    }
-    if (e.type===T.TREE) {
-      ctx.fillStyle='rgba(26,122,50,0.35)';
-      ctx.beginPath(); ctx.arc(px,py,CELL*0.9,0,Math.PI*2); ctx.fill();
-      ctx.fillStyle=COL[T.TREE]; ctx.font=`${CELL*0.9}px monospace`;
-      ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('♠',px,py);
-      continue;
-    }
-
-    
-    const col  = COL[e.type];
-    const glow = COL.glow[e.type] || 'rgba(255,255,255,0.1)';
-    const eRat = Math.max(0, Math.min(1, (e.energy||50)/100));
-    const hRat = Math.max(0, Math.min(1, (e.hydration||50)/100));
-
-    
-    ctx.strokeStyle = col+'44'; ctx.lineWidth = 0.7;
-    ctx.beginPath(); ctx.arc(px,py,CELL*0.85,0,Math.PI*2); ctx.stroke();
-
-    
-    if (hRat < 0.5) {
-      ctx.strokeStyle = 'rgba(0,200,240,0.5)'; ctx.lineWidth = 0.5;
-      ctx.beginPath(); ctx.arc(px,py,CELL*0.6,0,Math.PI*2*hRat); ctx.stroke();
-    }
-
-    ctx.fillStyle = glow;
-    ctx.beginPath(); ctx.arc(px,py,CELL*0.7,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle = col;
-    ctx.font = `bold ${CELL*0.85}px monospace`;
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    const sym = e.type===T.HERB?'H':e.type===T.PRED?'P':e.type===T.INSECT?'i':e.type===T.HUMAN?'Ω':e.type===T.OMNI?'O':'?';
-    ctx.fillText(sym, px, py);
-
-    
-    if (e.justMutated) {
-      ctx.strokeStyle='#ff00ff'; ctx.lineWidth=1.2;
-      ctx.beginPath(); ctx.arc(px,py,CELL*1.0,0,Math.PI*2); ctx.stroke();
-    }
-
-    
-    if (e.type===T.HUMAN) {
-      ctx.shadowColor=COL[T.HUMAN]; ctx.shadowBlur=8;
-      ctx.fillStyle=COL[T.HUMAN]; ctx.fillText('Ω',px,py);
-      ctx.shadowBlur=0;
-    }
+    if (e.type===T.GRASS || e.type===T.BUSH || e.type===T.TREE) drawPlant(e, px, py, d.cycle || 0);
   }
+
+  for (const e of d.entities) {
+    if (e.type===T.GRASS || e.type===T.BUSH || e.type===T.TREE || e.type===T.WATER) continue;
+    const px = e.x*CELL+CELL/2, py = e.y*CELL+CELL/2;
+    drawCreature(e, px, py, d.cycle || 0);
+  }
+
+  drawFire(d.fireCells, d.cycle || 0);
+  drawFxBursts(d.fxBursts, d.cycle || 0);
+  drawWeather(d.weather, d.cycle || 0);
+  drawLightOverlay(d);
+  drawVignette();
 }
 
 let popHist=[], climHist=[];
 
 function updateCharts(d) {
-  popHist.push([d.herbs, d.preds, d.insects, d.humans]);
+  popHist.push([d.herbs, d.preds, d.omnis || 0, d.insects, d.humans]);
   climHist.push([d.temp, d.waterLevel]);
   if (popHist.length > MAX_H) popHist.shift();
   if (climHist.length > MAX_H) climHist.shift();
 
-  const maxPop = Math.max(...popHist.map(p=>p[0]+p[1]+p[2]+p[3]), 1);
+  const maxPop = Math.max(...popHist.map(p=>p[0]+p[1]+p[2]+p[3]+p[4]), 1);
   drawLineMulti('popChart', popHist,
-    [['#00e676',0],['#ff4d6d',1],['#f9ca24',2],['#b97bff',3]], maxPop);
+    [['#00e676',0],['#ff4d6d',1],['#ff9f43',2],['#f9ca24',3],['#b97bff',4]], maxPop);
 
   
   const cc = document.getElementById('climChart');
@@ -1110,6 +1997,22 @@ function drawLineMulti(id, hist, series, maxV) {
 }
 
 function setText(id, v) { const el=document.getElementById(id); if(el) el.textContent=v; }
+function compactNumber(v) { return v >= 1000 ? (v/1000).toFixed(v >= 10000 ? 0 : 1)+'k' : v; }
+
+function updateBiomeBars(d) {
+  const box = document.getElementById('biome-bars');
+  if (!box || !d.biomeCounts) return;
+  const total = Object.values(d.biomeCounts).reduce((s,v)=>s+v,0) || 1;
+  box.innerHTML = BIOME_ORDER.map(b=>{
+    const def = BIOME_DEFS[b];
+    const pct = Math.round(((d.biomeCounts[b] || 0) / total) * 100);
+    return `<div class="biome-bar">
+      <span>${def.name}</span>
+      <div class="biome-bar-track"><div class="biome-bar-fill" style="width:${pct}%;background:${def.accent}"></div></div>
+      <b>${pct}%</b>
+    </div>`;
+  }).join('');
+}
 
 function updateUI(d) {
   setText('h-cycle', String(d.cycle).padStart(4,'0'));
@@ -1129,8 +2032,28 @@ function updateUI(d) {
   setText('st-born',  d.born);
   setText('st-dead',  d.dead);
   setText('st-mut',   d.mutations);
-  setText('st-season',d.season);
+  setText('st-season',d.seasonIcon ? `${d.seasonIcon} ${d.season}` : d.season);
   setText('st-water-lvl', d.waterLevel+'%');
+  setText('st-weather', d.weatherLabel || 'Calmo');
+  setText('map-season', d.seasonIcon ? `${d.seasonIcon} ${d.season}` : d.season);
+  setText('map-weather', d.weatherLabel || 'Calmo');
+  setText('map-light', d.light ? `${d.light.icon} ${d.light.name}` : 'Dia');
+  setText('st-time', d.light ? `${d.light.icon} ${d.light.name}` : 'Dia');
+  setText('st-health', (d.health ?? 0)+'%');
+  setText('st-biomass', compactNumber(d.biomass ?? 0));
+  setText('st-dominant-biome', BIOME_DEFS[d.dominantBiome]?.name || '—');
+  const healthEl = document.getElementById('st-health');
+  if (healthEl) healthEl.style.color = d.health > 70 ? 'var(--plant)' : d.health > 38 ? '#ffcf5a' : 'var(--pred)';
+  const lightEl = document.getElementById('st-time');
+  const mapLightEl = document.getElementById('map-light');
+  if (lightEl && d.light) lightEl.style.color = d.light.color;
+  if (mapLightEl && d.light) mapLightEl.style.color = d.light.color;
+  updateBiomeBars(d);
+  const weatherColor = d.weather ? (WEATHER_DEFS[d.weather.type]?.color || '#80e6ff') : WEATHER_DEFS.CALM.color;
+  const weatherEl = document.getElementById('st-weather');
+  const mapWeatherEl = document.getElementById('map-weather');
+  if (weatherEl) weatherEl.style.color = weatherColor;
+  if (mapWeatherEl) mapWeatherEl.style.color = weatherColor;
   setText('tval', d.temp+'°C');
   document.getElementById('tval').style.color = tc;
 
@@ -1191,7 +2114,10 @@ function initWorld() {
   world.mutBoost   = parseInt(document.getElementById('sl-mut').value)*0.5;
   world.init();
   popHist=[]; climHist=[];
-  speciesRegistry={}; speciesCounter=0;
+  frontendHeatmap = null;
+  frontendTrails = [];
+  terrainCanvas = null;
+  terrainSource = null;
 }
 
 function startSim() {
@@ -1226,10 +2152,13 @@ function scheduleTick() {
     for (const e of d.entities) {
       if (e.type!==T.GRASS&&e.type!==T.BUSH&&e.type!==T.TREE&&e.type!==T.WATER) {
         frontendHeatmap[e.x][e.y] = Math.min(100, (frontendHeatmap[e.x][e.y]||0)+1);
+        if (showTrails) frontendTrails.push({x:e.x, y:e.y, type:e.type, ttl:42});
       }
     }
     
     for (let x=0;x<COLS;x++) for (let y=0;y<ROWS;y++) if (frontendHeatmap[x][y]>0) frontendHeatmap[x][y]--;
+    for (const t of frontendTrails) t.ttl--;
+    frontendTrails = frontendTrails.filter(t=>t.ttl>0).slice(-900);
     updateUI(d);
     render(d);
     updateCharts(d);
@@ -1256,11 +2185,15 @@ canvas.addEventListener('mousemove', (ev)=>{
   if (fauna) {
     const sp = speciesRegistry[fauna.speciesKey];
     const typeLabel = fauna.type===T.HERB?'Herbívoro':fauna.type===T.PRED?'Predador':fauna.type===T.OMNI?'Onívoro':fauna.type===T.INSECT?'Inseto':'Proto-Humano';
+    const biomeLabel = BIOME_DEFS[world.biomeAt(mx,my)]?.name || 'Planície';
+    const variantLabel = sp?.visual?.pattern || 'base';
     tip.style.display='block';
     tip.style.left=(ev.clientX+16)+'px';
     tip.style.top=(ev.clientY-10)+'px';
     tip.innerHTML=`
       <div class="tt-name">${sp?sp.name:typeLabel} <span style="opacity:.5;font-size:9px">[${typeLabel}]</span></div>
+      Bioma: ${biomeLabel}<br>
+      Variante: ${variantLabel}<br>
       Energia: ${Math.round(fauna.energy)}/100<br>
       Hidratação: ${Math.round(fauna.hydration)}/100<br>
       Velocidade: ${fauna.speed.toFixed(2)}<br>
@@ -1276,6 +2209,8 @@ canvas.addEventListener('mousemove', (ev)=>{
       dbp.style.display='block';
       dbc.innerHTML = `<b style="color:${fauna.type===T.OMNI?'#ff9f43':fauna.type===T.PRED?'var(--pred)':'var(--herb)'}">${sp?sp.name:typeLabel}</b><br>
         Tipo: ${typeLabel}<br>
+        Bioma: <b>${biomeLabel}</b><br>
+        Variante visual: <b>${variantLabel}</b><br>
         Energia: <b>${Math.round(fauna.energy)}</b>/100<br>
         Hidratação: <b>${Math.round(fauna.hydration)}</b>/100<br>
         Velocidade: <b>${fauna.speed.toFixed(2)}</b><br>
@@ -1285,10 +2220,11 @@ canvas.addEventListener('mousemove', (ev)=>{
         Idade: <b>${fauna.age}</b>`;
     }
   } else if (plant) {
+    const biomeLabel = BIOME_DEFS[world.biomeAt(mx,my)]?.name || 'Planície';
     tip.style.display='block';
     tip.style.left=(ev.clientX+16)+'px';
     tip.style.top=(ev.clientY-10)+'px';
-    tip.innerHTML=`<div class="tt-name">${plant.type==='GRASS'?'Erva':plant.type==='BUSH'?'Arbusto':'Árvore'}</div>Energia: ${Math.round(plant.energy)}/${plant.maxEnergy}<br>Idade: ${plant.age}`;
+    tip.innerHTML=`<div class="tt-name">${plant.type==='GRASS'?'Erva':plant.type==='BUSH'?'Arbusto':'Árvore'}</div>Bioma: ${biomeLabel}<br>Energia: ${Math.round(plant.energy)}/${plant.maxEnergy}<br>Idade: ${plant.age}`;
   } else {
     tip.style.display='none';
   }
@@ -1328,24 +2264,54 @@ document.getElementById('btn-heatmap').addEventListener('click',()=>{
 document.getElementById('btn-biome').addEventListener('click',()=>{
   showBiomes = !showBiomes;
   document.getElementById('btn-biome').className = showBiomes ? 'btn on' : 'btn';
-  
-  if (showBiomes && !cachedBiomeMap) {
-    
-    cachedBiomeMap = [];
-    const rng = (x,y)=>Math.sin(x*0.13+y*0.07)*Math.cos(y*0.11-x*0.05);
-    for (let y=0;y<ROWS;y++) {
-      let row='';
-      for (let x=0;x<COLS;x++) {
-        const v = rng(x,y);
-        if (world && world.waterSources.some(w=>w.x===x&&w.y===y)) row+='W';
-        else if (v > 0.35) row+='F';
-        else if (v < -0.35) row+='D';
-        else row+='P';
-      }
-      cachedBiomeMap.push(row);
-    }
-  }
+  setText('map-biomes', showBiomes ? 'realçados' : 'base');
   document.getElementById('biome-legend').style.display = showBiomes ? 'flex' : 'none';
+  if (world) render(world.getStats());
+});
+
+document.getElementById('btn-hurricane').addEventListener('click',()=>{
+  if (!world) return;
+  const event = world.spawnWeather('HURRICANE', true);
+  addLog(event, world.cycle);
+  const d = world.getStats();
+  render(d);
+  updateUI(d);
+});
+
+document.getElementById('btn-rain').addEventListener('click',()=>{
+  if (!world) return;
+  const event = world.spawnWeather('RAIN', true);
+  addLog(event, world.cycle);
+  const d = world.getStats();
+  updateUI(d); render(d);
+});
+
+document.getElementById('btn-bloom').addEventListener('click',()=>{
+  if (!world) return;
+  addLog(world.triggerBloom(true), world.cycle);
+  const d = world.getStats();
+  updateUI(d); render(d);
+});
+
+document.getElementById('btn-fire').addEventListener('click',()=>{
+  if (!world) return;
+  addLog(world.igniteWildfire(true), world.cycle);
+  const d = world.getStats();
+  updateUI(d); render(d);
+});
+
+document.getElementById('btn-oasis').addEventListener('click',()=>{
+  if (!world) return;
+  addLog(world.addOasis(true), world.cycle);
+  const d = world.getStats();
+  updateUI(d); render(d);
+});
+
+document.getElementById('btn-trails').addEventListener('click',()=>{
+  showTrails = !showTrails;
+  if (!showTrails) frontendTrails = [];
+  document.getElementById('btn-trails').className = showTrails ? 'btn on' : 'btn';
+  if (world) render(world.getStats());
 });
 
 document.getElementById('btn-save').addEventListener('click',()=>{
@@ -1383,12 +2349,14 @@ document.getElementById('btn-drought').addEventListener('click',()=>{
 document.getElementById('btn-cold').addEventListener('click',()=>{
   if (!world) return;
   world.tempOverride = -15; world.tempOverrideTimer = 300;
+  addLog(world.spawnWeather('COLD'), world.cycle);
   addLog('climate:❄ Glaciação! Temperatura caiu para -15°C por 300 ciclos.', world.cycle);
 });
 
 document.getElementById('btn-heat').addEventListener('click',()=>{
   if (!world) return;
   world.tempOverride = 48; world.tempOverrideTimer = 300;
+  addLog(world.spawnWeather('HEAT'), world.cycle);
   addLog('climate:🔥 Onda de calor! Temperatura subiu para 48°C por 300 ciclos.', world.cycle);
 });
 
@@ -1421,6 +2389,9 @@ window.addEventListener('load',()=>{
   });
   initWorld();
   const d=world.getStats();
+  document.getElementById('btn-biome').className = showBiomes ? 'btn on' : 'btn';
+  document.getElementById('btn-trails').className = showTrails ? 'btn on' : 'btn';
+  document.getElementById('biome-legend').style.display = showBiomes ? 'flex' : 'none';
   render(d); updateUI(d);
 });
 
