@@ -1,114 +1,201 @@
-# 🌿 LifeEngine
+# LifeEngine
 
-> Uma simulação de cadeia alimentar que nasceu de uma brincadeira entre amigos.
+LifeEngine is an interactive evolutionary ecosystem simulator built with a Spring Boot backend and a standalone HTML5 canvas frontend. The project models creatures, food, biomes, climate pressure, mutation, population dynamics and visible ecological events on a living map.
 
-## 🍺 A origem
+The current interface is designed to be watched as a real-time ecosystem: terrain is rendered with visible biomes, creatures are drawn as organic forms, weather systems move across the map and ecological interventions can be triggered from the control panel.
 
-Tudo começou em uma roda de amigos, naquele tipo de conversa que começa sem destino e termina com uma ideia mirabolante. A brincadeira era simples: *"e se a gente pudesse ver o que acontece quando coloca um predador no meio de um monte de herbívoros?"*. A partir daí, o que era só papo virou código — e o LifeEngine nasceu.
+## Highlights
 
-A ideia central é observar como criaturas simples interagem, evoluem e (às vezes) se extinguem em um mundo finito. Nada de física quântica, nada de machine learning — só bichos com fome tentando sobreviver.
+- Real-time ecosystem simulation with herbivores, predators, omnivores, insects and emergent proto-humans.
+- Visible biome map with forest, plains, desert, water, wetland, tundra and highland regions.
+- Organic canvas rendering with textured terrain, creature variants, movement trails and heatmap overlays.
+- Climate systems including rain, heat waves, cold fronts and visible hurricanes.
+- Ecological events such as bloom, oasis creation and wildfire propagation.
+- Day and night lighting cycle with atmospheric overlays, clouds, sun/moon and vignette.
+- Ecosystem dashboard with health, biomass, dominant biome, active light phase and biome distribution.
+- REST endpoints and WebSocket broadcasting for server-driven simulation state.
 
----
+## Tech Stack
 
-## 🧬 O que é
+- Java 21
+- Spring Boot 3.2
+- Spring Web and WebSocket
+- HTML5 Canvas
+- Vanilla JavaScript
+- Maven
 
-LifeEngine é uma simulação de ecossistema em tempo real com dois tipos de criaturas:
+## Running the Project
 
-- **Herbívoros (`H`)** — buscam fontes de comida espalhadas pelo mapa para sobreviver.
-- **Predadores (`P`)** — caçam herbívoros para se alimentar e ganhar energia.
+### Spring Boot App
 
-Cada criatura possui atributos próprios que podem **mutar a cada geração**:
-
-| Atributo | Descrição |
-|---|---|
-| `speed` | Quantos passos a criatura dá por ciclo |
-| `perception` | Raio de visão (alcance para detectar comida/presas) |
-| `aggression` | Bônus de energia ao abater uma presa (predadores) |
-| `mutationRate` | Probabilidade de um atributo mudar na reprodução |
-
-As criaturas nascem, envelhecem, se reproduzem e morrem. Cada filho pode herdar atributos levemente diferentes dos pais — simulating natural selection de forma bem básica, mas surpreendentemente divertida de observar.
-
----
-
-## ⚙️ Stack técnica
-
-| Camada | Tecnologia |
-|---|---|
-| Backend | Java 21 + Spring Boot 3.2.5 |
-| Comunicação | WebSocket (STOMP) |
-| Serialização | Jackson |
-| Frontend | HTML + CSS + JavaScript (vanilla) |
-| Build | Maven |
-
-A simulação roda no servidor e envia o estado do mundo a cada ciclo via WebSocket para o frontend, que renderiza tudo em tempo real em um grid ASCII.
-
----
-
-## 🖥️ Sobre o frontend
-
-O frontend **não foi desenvolvido de forma 100% orgânica**. Grande parte da interface — estrutura do grid, painéis de estatísticas, controles de simulação e o sistema de eventos — foi construída com **auxílio significativo de IA**. O backend em Java foi o foco principal do desenvolvimento humano; o frontend serviu como camada de visualização e foi iterado rapidamente com essa ajuda.
-
-Se o CSS parecer um pouco "gerado", é porque... bem, foi. E não tem problema nenhum nisso.
-
----
-
-## 🚀 Como rodar
-
-### Pré-requisitos
-
-- Java 21+
-- Maven 3.8+
+From the project directory:
 
 ```powershell
+cd LifeEngine
 .\run.ps1
 ```
 
-Depois, acesse: **http://localhost:8080**
+Then open:
 
----
+```text
+http://localhost:8080
+```
 
-## 🎮 Controles da simulação
+### Manual Build
 
-| Ação | Descrição |
-|---|---|
-| ▶ Start / ⏸ Pause | Inicia ou pausa a simulação |
-| 🔄 Restart | Reinicia o mundo do zero |
-| ⚡ Velocidade | Ajusta o delay entre ciclos (mais rápido ou mais devagar) |
-| 🍃 Taxa de comida | Controla a frequência com que novas fontes de comida aparecem |
-| 🐣 Taxa de reprodução | Controla a chance de reprodução por ciclo |
-| ⚠️ Crise! | Elimina todos os predadores — veja o que acontece com a população de herbívoros |
+```bash
+mvn clean package
+java -jar target/life-engine-2.0.0.jar
+```
 
----
+### Standalone Frontend Preview
 
-## 📊 Métricas exibidas em tempo real
+The frontend is self-contained and can run without the backend. Open:
 
-- Ciclo atual e geração
-- Contagem de herbívoros e predadores
-- Fontes de comida disponíveis
-- Total de nascimentos e mortes
-- Médias populacionais: energia, velocidade, percepção e taxa de mutação
+```text
+src/main/resources/static/index.html
+```
 
----
+If you are using a browser that blocks local file access, serve the folder with any static server and open the page through `localhost`.
 
-## 🌍 Parâmetros do mundo
+## Controls
 
-O mundo tem **80 × 44** células. A simulação começa com:
+The right-side control panel allows direct intervention in the ecosystem:
 
-- **28 criaturas** (herbívoros e predadores misturados aleatoriamente)
-- **45 fontes de comida** distribuídas pelo mapa
+- Start/Pause and Reset control the simulation loop.
+- Extinction removes predator pressure from the world.
+- Drought, Glacial and Heat change environmental pressure.
+- Hurricane creates a visible storm system on the map.
+- Rain refills water and cools the environment.
+- Bloom injects a plant growth event.
+- Wildfire creates a spreading fire that damages plants and fauna.
+- Oasis adds new water and reshapes the surrounding biome.
+- Heatmap highlights high-traffic creature paths.
+- Biomes toggles biome labels and visual reference.
+- Trails toggles creature movement trails.
+- Save exports a JSON snapshot of the current simulation.
 
----
+## Simulation Model
 
-## 💀 Condições de fim
+LifeEngine models each world tick as a combination of:
 
-A simulação para automaticamente em caso de **extinção total** — quando não sobra nenhuma criatura viva. É mais comum do que parece.
+- plant growth and seeding;
+- creature aging, energy use and hydration;
+- predator/prey behavior;
+- water seeking and drinking;
+- climate and biome stress;
+- mutation and reproduction;
+- ecological events such as fire, bloom and storms.
 
----
+Creatures carry evolvable traits:
 
-## 🤝 Contribuindo
+| Trait | Purpose |
+| --- | --- |
+| `speed` | Movement range and energy cost |
+| `perception` | Search radius for food, water and threats |
+| `aggression` | Hunting and omnivore pressure |
+| `mutationRate` | Chance of genetic variation during reproduction |
+| `heatTolerance` | Resistance to high-temperature environments |
+| `coldTolerance` | Resistance to cold environments |
+| `intelligence` | Enables more advanced behavior and proto-human emergence |
 
-Esse projeto nasceu de uma brincadeira e qualquer ideia nova é bem-vinda. Quer adicionar novos tipos de criaturas? Plantas que crescem? Sazonalidade? Abre uma issue ou manda um PR.
+## Backend Architecture
 
----
+```text
+src/main/java/com/lifeengine/
+├── engine/
+│   └── SimulationEngine.java
+├── model/
+│   ├── Biome.java
+│   ├── Creature.java
+│   ├── CreatureType.java
+│   └── World.java
+└── websocket/
+    ├── SimulationController.java
+    ├── SimulationWebSocketHandler.java
+    └── WebSocketConfig.java
+```
 
-*Feito com café, papo de roda e uma pitada de IA para o front.*
+### Main Responsibilities
+
+- `World` owns the simulation state: biome grid, creatures, food, heatmap and ecological actions.
+- `Creature` contains movement, reproduction, mutation and survival behavior.
+- `Biome` defines environmental modifiers such as speed, food availability and heat stress.
+- `SimulationEngine` schedules ticks, computes statistics and broadcasts state.
+- `SimulationController` exposes REST controls.
+- `SimulationWebSocketHandler` broadcasts JSON state to connected clients.
+
+## REST API
+
+Base path:
+
+```text
+/api/sim
+```
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `POST` | `/start` | Start simulation |
+| `POST` | `/pause` | Pause simulation |
+| `POST` | `/reset` | Reset and restart simulation |
+| `POST` | `/crisis` | Trigger predator extinction event |
+| `POST` | `/bloom` | Trigger plant bloom event |
+| `POST` | `/oasis` | Add a new oasis to the biome map |
+| `POST` | `/wildfire` | Trigger a wildfire event |
+| `POST` | `/speed` | Update tick delay |
+| `POST` | `/params` | Update food, reproduction and mutation parameters |
+| `GET` | `/snapshot` | Export current simulation snapshot |
+| `GET` | `/status` | Return running status and current cycle |
+
+WebSocket stream:
+
+```text
+/ws/simulation
+```
+
+The WebSocket payload includes population counts, averages, creatures, food coordinates, biome map, biome summary, heatmap and event log entries.
+
+## Frontend Structure
+
+The primary UI lives in:
+
+```text
+src/main/resources/static/index.html
+```
+
+It includes:
+
+- the simulation canvas;
+- the standalone JavaScript simulation;
+- chart rendering;
+- control panel interactions;
+- terrain, weather, light and creature drawing routines.
+
+This file is intentionally self-contained so the experience can run both through Spring Boot and as a standalone browser preview.
+
+## Development
+
+Recommended verification before committing:
+
+```bash
+mvn -q -DskipTests package
+```
+
+For frontend-only changes, also open the static page and verify:
+
+- the map renders without a blank canvas;
+- controls update the event log and dashboard;
+- storms, fire, bloom and oasis effects are visible;
+- browser console has no JavaScript errors.
+
+## Repository
+
+GitHub:
+
+```text
+https://github.com/RCruzm08/LifeEngine
+```
+
+## License
+
+No license file is currently included. Add one before distributing or accepting external contributions.
